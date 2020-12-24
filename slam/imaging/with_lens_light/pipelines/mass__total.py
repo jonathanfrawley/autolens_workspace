@@ -61,10 +61,8 @@ def make_pipeline(slam, settings, source_results, light_results):
            previous pipelines.
     """
 
-    mass = (
-        slam.pipeline_mass.setup_mass.mass_prior_model_with_updated_priors_from_result(
-            result=source_results.last, unfix_mass_centre=True
-        )
+    mass = slam.pipeline_mass.setup_mass.mass_prior_model_with_updated_priors_from_result(
+        result=source_results.last, unfix_mass_centre=True
     )
 
     """SLaM: Use the source and lens light models from the previous *Source* and *Light* pipelines."""
@@ -87,7 +85,7 @@ def make_pipeline(slam, settings, source_results, light_results):
             result=light_results.last
         ),
         settings=settings,
-        use_as_hyper_dataset=True
+        use_as_hyper_dataset=True,
     )
 
     if not slam.setup_hyper.hyper_fixed_after_source:

@@ -33,12 +33,8 @@ image = al.Array.from_fits(
     file_path=path.join(dataset_path, "image.fits"), pixel_scales=pixel_scales
 )
 
-cmap = aplt.ColorMap(
-    norm="log",
-    norm_min=1.0e-4,
-    norm_max=0.4 * np.max(image),
-    linthresh=0.05,
-    linscale=0.1,
+cmap = aplt.Cmap(
+    norm="log", vmin=1.0e-4, vmax=0.4 * np.max(image), linthresh=0.05, linscale=0.1
 )
 
 scribbler = scribbler.Scribbler(image=image.in_2d, cmap=cmap)

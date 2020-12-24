@@ -29,7 +29,7 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-"""We can use the `Imaging` plotters to plot the image, noise-map and psf of the dataset."""
+"""We can use the `Imaging` plotter to plot the image, noise-map and psf of the dataset."""
 
 aplt.Imaging.image(imaging=imaging)
 aplt.Imaging.noise_map(imaging=imaging)

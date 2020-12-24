@@ -240,7 +240,7 @@ for fit in fit_gen:
 # %%
 """
 The benefit of inspecting fits using the aggregator, rather than the files outputs to the hard-disk, is that we can 
-customize the plots using the PyAutoLens plotters.
+customize the plots using the PyAutoLens plotter.
 
 Below, we create a new function to apply as a generator to do this. However, we use a convenience method available 
 in the PyAutoLens aggregator package to set up the fit.
@@ -253,10 +253,10 @@ for fit in fit_gen:
 
     plotter = aplt.Plotter(
         figure=aplt.Figure(figsize=(12, 12)),
-        labels=aplt.Labels(title="Custom Image", titlesize=24, ysize=24, xsize=24),
-        ticks=aplt.Ticks(ysize=24, xsize=24),
-        cmap=aplt.ColorMap(norm="log", norm_max=1.0, norm_min=1.0),
-        cb=aplt.ColorBar(ticksize=20),
+        labels=aplt.Labels(title="Custom Image", titlesize=24, labelsize=24, labelsize=24),
+        ticks=aplt.Ticks(labelsize=24, labelsize=24),
+        cmap=aplt.Cmap(norm="log", vmax=1.0, vmin=1.0),
+        colorbar=aplt.Colorbar(ticksize=20),
         units=aplt.Units(in_kpc=True),
     )
 

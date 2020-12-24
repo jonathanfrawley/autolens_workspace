@@ -87,13 +87,11 @@ def make_pipeline(slam, settings, source_results):
             result=source_results.last
         ),
         settings=settings,
-        use_as_hyper_dataset=True
+        use_as_hyper_dataset=True,
     )
 
     if not slam.setup_hyper.hyper_fixed_after_source:
 
-        phase1 = phase1.extend_with_hyper_phase(
-            setup_hyper=slam.setup_hyper,
-        )
+        phase1 = phase1.extend_with_hyper_phase(setup_hyper=slam.setup_hyper)
 
     return al.PipelineDataset(pipeline_name, path_prefix, source_results, phase1)

@@ -224,7 +224,7 @@ def make_pipeline(slam, settings, source_parametric_results):
         hyper_image_sky=phase3.result.instance.hyper_image_sky,
         hyper_background_noise=phase3.result.instance.hyper_background_noise,
         settings=settings,
-        use_as_hyper_dataset=True
+        use_as_hyper_dataset=True,
     )
 
     phase4 = phase4.extend_with_hyper_phase(

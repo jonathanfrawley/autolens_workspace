@@ -213,7 +213,7 @@ def make_pipeline_single_plane(slam, settings, mass_results):
         mass_results,
         phase1,
         phase2,
-   #     phase3,
+        #     phase3,
     )
 
 
@@ -368,5 +368,5 @@ def make_pipeline_multi_plane(slam, settings, mass_results):
         mass_results,
         phase1,
         phase2,
-    #    phase3,
+        #    phase3,
     )

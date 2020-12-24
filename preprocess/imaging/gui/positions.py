@@ -47,10 +47,10 @@ For lenses with bright lens light emission, it can be difficult to get the sourc
 below uses a log-scale with a capped maximum, which better contrasts the lens and source emission.
 """
 
-cmap = aplt.ColorMap(
+cmap = aplt.Cmap(
     norm="linear",
-    norm_min=1.0e-4,
-    norm_max=np.max(imaging.image),
+    vmin=1.0e-4,
+    vmax=np.max(imaging.image),
     #   linthresh=0.05,
     #   linscale=0.1,
 )

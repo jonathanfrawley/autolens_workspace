@@ -88,9 +88,7 @@ def make_pipeline(slam, settings, source_results, light_results):
     dark.redshift_source = slam.redshift_source
 
     slam.pipeline_mass.setup_mass.align_bulge_and_dark_centre(
-        results=light_results,
-        bulge_prior_model=bulge,
-        dark_prior_model=dark
+        results=light_results, bulge_prior_model=bulge, dark_prior_model=dark
     )
 
     """SLaM: Include a Super-Massive Black Hole (SMBH) in the mass model is specified in `SLaMPipelineMass`."""
@@ -170,10 +168,12 @@ def make_pipeline(slam, settings, source_results, light_results):
         ),
         hyper_background_noise=phase1.result.hyper.instance.optional.hyper_background_noise,
         settings=settings,
-        use_as_hyper_dataset=True
+        use_as_hyper_dataset=True,
     )
 
     if not slam.setup_hyper.hyper_fixed_after_source:
-        phase2 = phase2.extend_with_hyper_phase(setup_hyper=slam.setup_hyper, include_hyper_image_sky=True)
+        phase2 = phase2.extend_with_hyper_phase(
+            setup_hyper=slam.setup_hyper, include_hyper_image_sky=True
+        )
 
     return al.PipelineDataset(pipeline_name, path_prefix, light_results, phase1, phase2)

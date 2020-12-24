@@ -257,10 +257,10 @@ light__parametric = light__parametric.make_pipeline(
 )
 light_results = light__parametric.run(dataset=imaging, mask=mask)
 
-mass__light_dark = mass__total.make_pipeline(
+mass__total = mass__total.make_pipeline(
     slam=slam,
     settings=settings,
     source_results=source_results,
     light_results=light_results,
 )
-mass_results = mass__light_dark.run(dataset=imaging, mask=mask)
+mass_results = mass__total.run(dataset=imaging, mask=mask)
