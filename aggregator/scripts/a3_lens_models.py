@@ -67,7 +67,7 @@ to fit the data in the phase itself).
 grid = al.Grid.uniform(shape_2d=(100, 100), pixel_scales=0.1)
 
 for tracer in ml_tracers:
-    aplt.Tracer.convergence(tracer=tracer, grid=grid)
+    aplt.Tracer.figure_convergence(tracer=tracer, grid=grid)
 
 # %%
 """
@@ -105,8 +105,8 @@ grid = al.Grid.uniform(shape_2d=(100, 100), pixel_scales=0.1)
 
 for tracer in tracer_gen:
 
-    aplt.Tracer.convergence(tracer=tracer, grid=grid)
-    aplt.Tracer.potential(tracer=tracer, grid=grid)
+    aplt.Tracer.figure_convergence(tracer=tracer, grid=grid)
+    aplt.Tracer.figure_potential(tracer=tracer, grid=grid)
 
 # %%
 """
@@ -121,8 +121,8 @@ cleaner.
 tracer_gen = al.agg.Tracer(aggregator=agg_filter)
 
 for tracer in tracer_gen:
-    aplt.Tracer.convergence(tracer=tracer, grid=grid)
-    aplt.Tracer.potential(tracer=tracer, grid=grid)
+    aplt.Tracer.figure_convergence(tracer=tracer, grid=grid)
+    aplt.Tracer.figure_potential(tracer=tracer, grid=grid)
 
 # %%
 """
@@ -193,7 +193,7 @@ plt.show()
 
 # %%
 """
-Now lets also include error bars at 3 sigma confidence.
+Now lets also include_2d error bars at 3 sigma confidence.
 """
 
 # %%

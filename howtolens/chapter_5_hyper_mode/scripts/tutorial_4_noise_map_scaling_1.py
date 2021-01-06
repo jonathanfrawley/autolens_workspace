@@ -102,11 +102,12 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -148,11 +149,12 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 print("Evidence = ", fit.log_evidence)
@@ -211,7 +213,7 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 # %%
@@ -263,10 +265,10 @@ contribution_map = source_contribution_factor_1.hyper_galaxy.contribution_map_fr
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.Array(
+aplt.ArrayPlotter(
     array=contribution_map,
     mask=mask,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Contribution Map")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
 )
 
 source_contribution_factor_3 = al.Galaxy(
@@ -281,10 +283,10 @@ contribution_map = source_contribution_factor_3.hyper_galaxy.contribution_map_fr
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.Array(
+aplt.ArrayPlotter(
     array=contribution_map,
     mask=mask,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Contribution Map")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
 )
 
 source_hyper_galaxy = al.Galaxy(
@@ -299,10 +301,10 @@ contribution_map = source_hyper_galaxy.hyper_galaxy.contribution_map_from_hyper_
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.Array(
+aplt.ArrayPlotter(
     array=contribution_map,
     mask=mask,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Contribution Map")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
 )
 
 # %%
@@ -342,7 +344,7 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 
@@ -368,7 +370,7 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 

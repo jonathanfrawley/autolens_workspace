@@ -109,7 +109,7 @@ fit = fit_masked_imaging_with_lens_and_source_galaxy(
 print("Evidence using baseline variances = ", fit.log_evidence)
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 # %%
@@ -187,20 +187,20 @@ lens_contribution_map = lens_galaxy_hyper.hyper_galaxy.contribution_map_from_hyp
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image_lens
 )
 
-aplt.Array(
+aplt.ArrayPlotter(
     array=lens_contribution_map,
     mask=mask,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Contribution Map")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Lens Contribution Map")),
 )
 
 source_contribution_map = source_magnification_hyper.hyper_galaxy.contribution_map_from_hyper_images(
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image_source
 )
 
-aplt.Array(
+aplt.ArrayPlotter(
     array=source_contribution_map,
     mask=mask,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Source Contribution Map")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source Contribution Map")),
 )
 
 # %%
@@ -219,7 +219,7 @@ fit = fit_masked_imaging_with_lens_and_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 print("Evidence using baseline variances = ", 3356.88)
@@ -278,7 +278,7 @@ al.FitImaging(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 # %%

@@ -112,7 +112,7 @@ source_galaxy = al.Galaxy(
 """Use these galaxies to setup a tracer, which will generate the image for the simulated `Imaging` dataset."""
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
-aplt.Tracer.image(tracer=tracer, grid=grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid)
 
 """
 We can then pass this simulator a tracer, which uses the tracer to create a ray-traced image which is simulated as
@@ -123,7 +123,8 @@ imaging = simulator.from_tracer_and_grid(tracer=tracer, grid=grid)
 
 """Lets plot the simulated `Imaging` dataset before we output it to fits."""
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 """Output our simulated dataset to the dataset path as .fits files"""
 

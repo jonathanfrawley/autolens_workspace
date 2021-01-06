@@ -40,7 +40,8 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.05,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 # %%
 """
@@ -54,7 +55,7 @@ mask_circular = al.Mask2D.circular(
 )
 
 aplt.Imaging.subplot_imaging(
-    imaging=imaging, mask=mask_circular, include=aplt.Include(border=True)
+    imaging=imaging, mask=mask_circular, include_2d=aplt.Include2D(border=True)
 )
 
 # %%
@@ -74,7 +75,7 @@ mask_annular = al.Mask2D.circular_annular(
 )
 
 aplt.Imaging.subplot_imaging(
-    imaging=imaging, mask=mask_annular, include=aplt.Include(border=True)
+    imaging=imaging, mask=mask_annular, include_2d=aplt.Include2D(border=True)
 )
 
 # %%
@@ -136,8 +137,8 @@ fit = perform_fit_with_source_galaxy_mask_and_border(
     settings_pixelization=al.SettingsPixelization(use_border=False),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True)
 )
 
 # %%
@@ -154,8 +155,8 @@ fit = perform_fit_with_source_galaxy_mask_and_border(
     settings_pixelization=al.SettingsPixelization(use_border=False),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True)
 )
 
 # %%
@@ -171,8 +172,8 @@ Lets quickly check this using a `Mapper` `Plotter`.
 aplt.Mapper.subplot_image_and_mapper(
     image=fit.masked_imaging.image,
     mapper=fit.inversion.mapper,
-    include=aplt.Include(inversion_grid=True),
-    image_pixel_indexes=[
+    include_2d=aplt.Include2D(inversion_grid=True),
+    full_indexes=[
         [3578, 3579, 3580, 3581, 3582],
         [3678, 3679, 3680, 3681, 3682],
         [3778, 3779, 3780, 3781, 3782],
@@ -191,8 +192,8 @@ a quick look.
 """
 
 # %%
-aplt.Tracer.deflections_y(tracer=fit.tracer, grid=fit.grid)
-aplt.Tracer.deflections_x(tracer=fit.tracer, grid=fit.grid)
+aplt.Tracer.figure_deflections_y(tracer=fit.tracer, grid=fit.grid)
+aplt.Tracer.figure_deflections_x(tracer=fit.tracer, grid=fit.grid)
 
 # %%
 """
@@ -231,8 +232,8 @@ fit = perform_fit_with_source_galaxy_mask_and_border(
     settings_pixelization=al.SettingsPixelization(use_border=False),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True)
 )
 
 # %%
@@ -254,15 +255,15 @@ fit = perform_fit_with_source_galaxy_mask_and_border(
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True)
 )
 
 aplt.Mapper.subplot_image_and_mapper(
     image=fit.masked_imaging.image,
     mapper=fit.inversion.mapper,
-    include=aplt.Include(inversion_grid=True),
-    image_pixel_indexes=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+    include_2d=aplt.Include2D(inversion_grid=True),
+    full_indexes=[[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
 )
 
 # %%
@@ -312,7 +313,7 @@ mask_circular = al.Mask2D.circular(
 )
 
 aplt.Imaging.subplot_imaging(
-    imaging=imaging, mask=mask_circular, include=aplt.Include(border=True)
+    imaging=imaging, mask=mask_circular, include_2d=aplt.Include2D(border=True)
 )
 
 # %%
@@ -366,8 +367,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     settings_pixelization=al.SettingsPixelization(use_border=False),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 # %%
@@ -383,8 +384,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     mask=mask_circular,
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 # %%
@@ -407,8 +408,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     mask=mask_circular,
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 mask_circular = al.Mask2D.circular(
@@ -420,8 +421,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     mask=mask_circular,
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 
@@ -434,8 +435,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     mask=mask_circular,
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 
@@ -448,8 +449,8 @@ fit = perform_fit_x2_lenses_with_source_galaxy_mask_and_border(
     mask=mask_circular,
     settings_pixelization=al.SettingsPixelization(use_border=True),
 )
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_grid=True, border=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion, include_2d=aplt.Include2D(inversion_grid=True, border=True)
 )
 
 # %%

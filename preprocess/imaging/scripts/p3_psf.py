@@ -3,7 +3,7 @@
 __Preprocess 3: - PSF__
 
 The Point Spread Function (PSF) describes blurring due the optics of your dataset`s telescope. It is used by PyAutoLens
-when fitting a dataset to include these effects, such that does not bias the lens model. It should be estimated from a
+when fitting a dataset to include_2d these effects, such that does not bias the lens model. It should be estimated from a
 stack of stars in the image during data reduction or using PSF simulator technology suited to your telescope.
 
 This tutorial describes preprocessing your dataset`s psf to adhere too the units and formats required by PyAutoLens.
@@ -53,7 +53,7 @@ imaging_path = path.join(dataset_path, "imaging")
 
 psf = al.Kernel.from_fits(file_path=f"{imaging_path}/psf.fits", hdu=0, pixel_scales=0.1)
 
-aplt.Array(array=psf)
+aplt.ArrayPlotter(array=psf)
 
 # %%
 """
@@ -74,7 +74,7 @@ large_psf = al.Kernel.from_fits(
     file_path=f"{imaging_path}/psf.fits", hdu=0, pixel_scales=0.1
 )
 
-aplt.Array(array=large_psf)
+aplt.ArrayPlotter(array=large_psf)
 
 # %%
 """
@@ -84,7 +84,7 @@ We can resize a psf the same way that we resize an image.
 # %%
 trimmed_psf = al.preprocess.array_with_new_shape(array=psf, new_shape=(21, 21))
 
-aplt.Array(array=trimmed_psf)
+aplt.ArrayPlotter(array=trimmed_psf)
 
 # %%
 """
@@ -103,7 +103,7 @@ even_psf = al.Kernel.from_fits(
 
 print(even_psf.shape_2d)
 
-aplt.Array(array=even_psf)
+aplt.ArrayPlotter(array=even_psf)
 
 # %%
 """
@@ -117,7 +117,7 @@ odd_psf = al.preprocess.psf_with_odd_dimensions_from_psf(psf=psf)
 
 print(odd_psf.shape_2d)
 
-aplt.Array(array=odd_psf)
+aplt.ArrayPlotter(array=odd_psf)
 
 # %%
 """
@@ -140,7 +140,7 @@ unnormalized_psf = al.Kernel.from_fits(
     file_path=f"{imaging_path}/psf.fits", hdu=0, pixel_scales=0.1, renormalize=False
 )
 
-aplt.Array(array=unnormalized_psf)
+aplt.ArrayPlotter(array=unnormalized_psf)
 
 
 # %%
@@ -156,4 +156,4 @@ normalized_psf = al.Kernel.from_fits(
     renormalize=True,
 )
 
-aplt.Array(array=normalized_psf)
+aplt.ArrayPlotter(array=normalized_psf)

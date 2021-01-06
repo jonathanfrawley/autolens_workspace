@@ -94,11 +94,12 @@ fit = fit_masked_imaging_with_source_galaxy(
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -108,8 +109,9 @@ the effective regularization_coefficient of each source pixel is our input coeff
 """
 
 # %%
-aplt.Inversion.regularization_weights(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_regularization_weights(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -134,12 +136,14 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_adaptive_regularization
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
-aplt.Inversion.regularization_weights(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_regularization_weights(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -164,7 +168,7 @@ _Pixelization_ simply *does not*  have sufficient resolution to resolve the sour
 
 # %%
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 # %%
@@ -231,16 +235,18 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_adaptive_regularization
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
-aplt.Inversion.regularization_weights(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_regularization_weights(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
 print("Evidence using adaptive `Regularization`. ", fit.log_evidence)

@@ -70,7 +70,7 @@ agg_power_law_hyper_shear = agg_power_law.filter(
     agg_power_law.directory.contains("hyper_galaxies")
 )
 
-# This gives the 3 results from the 6 above that include a shear.
+# This gives the 3 results from the 6 above that include_2d a shear.
 agg_power_law_hyper_shear = agg_power_law_hyper_shear.filter(
     agg_power_law_hyper_shear.directory.contains("with_shear")
 )

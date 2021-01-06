@@ -43,7 +43,7 @@ imaging = al.Imaging.from_fits(
 # %%
 """
 When it comes to determining an appropriate mask for this image, the best approach is to set up a `Mask2D` and pass it 
-to a `Imaging` plotter. You can then check visually if the mask is an appropriate size or not. 
+to a `Imaging` mat_plot_2d. You can then check visually if the mask is an appropriate size or not. 
 
 Below, we choose an inner radius that cuts into our lensed source galaxy - clearly this isn't a good mask.
 """
@@ -56,7 +56,10 @@ mask = al.Mask2D.circular_annular(
     outer_radius=2.4,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 # %%
 """
@@ -71,7 +74,10 @@ mask = al.Mask2D.circular_annular(
     outer_radius=2.4,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 # %%
 """
@@ -229,7 +235,8 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 # %%
 """

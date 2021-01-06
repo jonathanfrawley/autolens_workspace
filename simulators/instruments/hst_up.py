@@ -89,7 +89,7 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
 """Lets look at the tracer`s image - this is the image we'll be simulating."""
 
-aplt.Tracer.image(tracer=tracer, grid=grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid)
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an
@@ -100,7 +100,8 @@ imaging = simulator.from_tracer_and_grid(tracer=tracer, grid=grid)
 
 """Lets plot the simulated `Imaging` dataset before we output it to fits."""
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 """Output our simulated dataset to the dataset path as .fits files"""
 
@@ -111,12 +112,13 @@ imaging.output_to_fits(
     overwrite=True,
 )
 
-plotter = aplt.Plotter(
+mat_plot_2d = aplt.MatPlot2D(
     labels=aplt.Labels(title="Image"),
     output=aplt.Output(path=dataset_path, filename="image", format="png"),
 )
 
-aplt.Imaging.image(imaging=imaging, plotter=plotter)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging, mat_plot_2d=mat_plot_2d)
+imaging_plotter.figure_image()
 
 """
 Pickle the `Tracer` in the dataset folder, ensuring the true `Tracer` is safely stored and available if we need to 

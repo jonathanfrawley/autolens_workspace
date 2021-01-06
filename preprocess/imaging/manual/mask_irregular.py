@@ -67,14 +67,14 @@ Blur the image with this Gaussian smoothing kernel and plot the resulting image.
 
 # %%
 blurred_image = blurring_gaussian.convolved_array_from_array(array=image)
-aplt.Array(array=blurred_image)
+aplt.ArrayPlotter(array=blurred_image)
 
 # %%
 """Now compute the absolute signal-to-noise map of this blurred image, given the noise-map of the observed dataset."""
 
 # %%
 blurred_signal_to_noise_map = blurred_image / noise_map
-aplt.Array(array=blurred_signal_to_noise_map)
+aplt.ArrayPlotter(array=blurred_signal_to_noise_map)
 
 # %%
 """Now create the mask in 2ll pixels where the signal to noise is above some threshold value."""
@@ -84,7 +84,7 @@ mask = np.where(
     blurred_signal_to_noise_map.in_2d > signal_to_noise_threshold, False, True
 )
 mask = al.Mask2D.manual(mask=mask, pixel_scales=image.pixel_scales, sub_size=1)
-aplt.Array(array=image, mask=mask)
+aplt.ArrayPlotter(array=image, mask=mask)
 
 # %%
 """

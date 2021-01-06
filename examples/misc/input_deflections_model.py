@@ -37,7 +37,8 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 """
 In `autolens_workspace/examples/misc/files` you`ll find the script `make_source_plane.py`, which creates the image-plane 
@@ -56,8 +57,8 @@ deflections_x = al.Array.from_fits(
 )
 
 """Lets plot the deflection angles to make sure they look like what we expect!"""
-aplt.Array(array=deflections_y)
-aplt.Array(array=deflections_x)
+aplt.ArrayPlotter(array=deflections_y)
+aplt.ArrayPlotter(array=deflections_x)
 
 """Lets next load and plot the image-plane grid"""
 grid = al.Grid.from_fits(

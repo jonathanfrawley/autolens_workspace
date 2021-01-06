@@ -121,7 +121,7 @@ Now lets plot the image and mask, so we can check that the mask includes the reg
 """
 
 # %%
-aplt.Array(array=image, mask=mask)
+aplt.ArrayPlotter(array=image, mask=mask)
 
 # %%
 """

@@ -120,18 +120,18 @@ print()
 
 # %%
 """
-Using the plotter we've used throughout this chapter, we can visualize any aspect of a fit we're interested in. 
+Using the mat_plot_2d we've used throughout this chapter, we can visualize any aspect of a fit we're interested in. 
 For example, if we want to plot the image of the source galaxy `MassProfile`, we can do this in a variety of 
 different ways
 """
 
 # %%
-aplt.Tracer.image(tracer=fit.tracer, grid=masked_imaging.grid)
+aplt.Tracer.figure_image(tracer=fit.tracer, grid=masked_imaging.grid)
 
 source_plane_grid = tracer.traced_grids_of_planes_from_grid(grid=masked_imaging.grid)[1]
-aplt.Plane.image(plane=fit.tracer.source_plane, grid=source_plane_grid)
+aplt.plane.image(plane=fit.tracer.source_plane, grid=source_plane_grid)
 
-aplt.Galaxy.image(galaxy=fit.tracer.source_plane.galaxies[0], grid=source_plane_grid)
+aplt.galaxy.image(galaxy=fit.tracer.source_plane.galaxies[0], grid=source_plane_grid)
 
 # %%
 """
@@ -142,16 +142,16 @@ components of the fit and `Tracer`.
 """
 
 # %%
-aplt.LightProfile.image(
+aplt.LightProfile.figure_image(
     light_profile=fit.tracer.source_plane.galaxies[0].bulge,
     grid=source_plane_grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Bulge image")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Bulge image")),
 )
 
-aplt.LightProfile.image(
+aplt.LightProfile.figure_image(
     light_profile=fit.tracer.source_plane.galaxies[0].disk,
     grid=source_plane_grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Disk image")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Disk image")),
 )
 
 # %%

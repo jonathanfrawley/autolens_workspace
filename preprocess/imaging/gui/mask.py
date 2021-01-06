@@ -38,7 +38,7 @@ mask = al.Mask2D.manual(mask=np.invert(mask), pixel_scales=pixel_scales)
 
 """Now lets plot the image and mask, so we can check that the mask includes the regions of the image we want."""
 
-aplt.Array(array=image, mask=mask)
+aplt.ArrayPlotter(array=image, mask=mask)
 
 """
 Now we`re happy with the mask, lets output it to the dataset folder of the lens, so that we can load it from a .fits

@@ -104,7 +104,7 @@ light_centres = al.GridIrregularGrouped(grid=light_centres)
 Now lets plot the image and lens light centre, so we can check that the centre overlaps the brightest pixel in the
 lens light.
 """
-aplt.Array(array=imaging.image, light_profile_centres=light_centres)
+aplt.ArrayPlotter(array=imaging.image, light_profile_centres=light_centres)
 
 """
 Now we`re happy with the lens light centre(s), lets output them to the dataset folder of the lens, so that we can 

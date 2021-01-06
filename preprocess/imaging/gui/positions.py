@@ -123,7 +123,7 @@ positions = al.GridIrregularGrouped(grid=positions)
 
 """Now lets plot the image and positions, so we can check that the positions overlap different regions of the source."""
 
-aplt.Array(array=imaging.image, positions=positions)
+aplt.ArrayPlotter(array=imaging.image, positions=positions)
 
 """
 Now we`re happy with the positions, lets output them to the dataset folder of the lens, so that we can load them from a

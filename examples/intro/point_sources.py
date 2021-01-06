@@ -66,7 +66,7 @@ Infact, the `Tracer` has the `PositionSolver` we introduce next built into it, a
 _Tracer_`s multiple images on the figure (they should appear as black dots on the image)!
 """
 
-# aplt.Tracer.image(tracer=tracer, grid=grid, include=aplt.Include(multiple_images=True))
+# aplt.Tracer.image(tracer=tracer, grid=grid, include_2d=aplt.Include2D(multiple_images=True))
 
 """
 At this point, you might be wondering why don't we use the image of the lensed source to compute our multiple images?
@@ -90,4 +90,4 @@ positions = solver.solve(
     lensing_obj=lens_galaxy, source_plane_coordinate=source_galaxy.light.centre
 )
 
-aplt.Tracer.image(tracer=tracer, grid=grid, positions=positions)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid, positions=positions)

@@ -97,16 +97,16 @@ Lets have a quick look at the appearance of our lens galaxy and its satellite.
 """
 
 # %%
-aplt.Galaxy.image(
+aplt.galaxy.image(
     galaxy=lens_galaxy,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Galaxy")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Lens Galaxy")),
 )
 
-aplt.Galaxy.image(
+aplt.galaxy.image(
     galaxy=lens_satellite,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Satellite")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Lens Satellite")),
 )
 
 # %%
@@ -115,25 +115,31 @@ And their deflection angles - note that the satellite doesn`t contribute as much
 """
 
 # %%
-aplt.Galaxy.deflections_y(
+aplt.galaxy.deflections_y(
     galaxy=lens_galaxy,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Galaxy Deflections (y)")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Lens Galaxy Deflections (y)")),
 )
-aplt.Galaxy.deflections_y(
+aplt.galaxy.deflections_y(
     galaxy=lens_satellite,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Satellite Deflections (y)")),
+    mat_plot_2d=aplt.MatPlot2D(
+        labels=aplt.Labels(title="Lens Satellite Deflections (y)")
+    ),
 )
-aplt.Galaxy.deflections_x(
+aplt.galaxy.deflections_x(
     galaxy=lens_galaxy,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Galalxy Deflections (x)")),
+    mat_plot_2d=aplt.MatPlot2D(
+        labels=aplt.Labels(title="Lens Galalxy Deflections (x)")
+    ),
 )
-aplt.Galaxy.deflections_x(
+aplt.galaxy.deflections_x(
     galaxy=lens_satellite,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Lens Satellite Deflections (x)")),
+    mat_plot_2d=aplt.MatPlot2D(
+        labels=aplt.Labels(title="Lens Satellite Deflections (x)")
+    ),
 )
 
 # %%
@@ -176,16 +182,16 @@ Lets look at our source galaxies (before lensing)
 """
 
 # %%
-aplt.Galaxy.image(
+aplt.galaxy.image(
     galaxy=source_galaxy_0,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Source Galaxy 0")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source Galaxy 0")),
 )
 
-aplt.Galaxy.image(
+aplt.galaxy.image(
     galaxy=source_galaxy_1,
     grid=grid,
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Source Galaxy 1")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source Galaxy 1")),
 )
 
 
@@ -221,7 +227,7 @@ We can next plot the tracer`s `Profile` image, which is compute as follows:
 """
 
 # %%
-aplt.Tracer.image(tracer=tracer, grid=grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid)
 
 # %%
 """
@@ -231,10 +237,10 @@ As we did previously, we can extract the `Grid`'s of each plane and inspect the 
 # %%
 traced_grids = tracer.traced_grids_of_planes_from_grid(grid=grid)
 
-aplt.Plane.plane_grid(
+aplt.plane.plane_grid(
     plane=tracer.source_plane,
     grid=traced_grids[1],
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Source-plane Grid")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source-plane Grid")),
 )
 
 # %%
@@ -243,11 +249,11 @@ We can zoom in on the `centre` of the source-plane.
 """
 
 # %%
-aplt.Plane.plane_grid(
+aplt.plane.plane_grid(
     plane=tracer.source_plane,
     grid=traced_grids[1],
     axis_limits=[-0.2, 0.2, -0.2, 0.2],
-    plotter=aplt.Plotter(labels=aplt.Labels(title="Source-plane Grid")),
+    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source-plane Grid")),
 )
 
 # %%
@@ -257,8 +263,8 @@ a cosmology, our unit can be converted to kiloparsecs! (This cell can take a bit
 """
 
 # %%
-sub_plotter = aplt.SubPlotter(units=aplt.Units(in_kpc=True))
-aplt.Tracer.subplot_tracer(tracer=tracer, grid=grid, sub_plotter=sub_plotter)
+mat_plot_2d = aplt.MatPlot2D(units=aplt.Units(in_kpc=True))
+aplt.Tracer.subplot_tracer(tracer=tracer, grid=grid, mat_plot_2d=mat_plot_2d)
 
 # %%
 """

@@ -60,7 +60,7 @@ def make_pipeline(setup, settings, real_space_mask):
            the pipeline.
         2) Use the source model determined from `SetupSourceParametric` (e.g. `bulge_prior_model`, `disk_prior_model`, 
            etc.)
-        3) Include an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
+        3) include_2d an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
         4) Set priors on the lens galaxy (y,x) centre such that we assume the image is centred around the lens galaxy.
     """
 

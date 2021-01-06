@@ -31,7 +31,7 @@ agg = af.Aggregator(directory=path.join("output", "aggregator"))
 
 # %%
 """
-We can filter results to only include completed results. By including the `completed_only` input below, any 
+We can filter results to only include_2d completed results. By including the `completed_only` input below, any 
 results which are in the middle of a non-linear will be omitted and not loaded in the `Aggregator`.
 """
 

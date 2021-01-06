@@ -48,7 +48,7 @@ image = sersic_light_profile.image_from_grid(grid=grid)
 
 """The plot module provides convenience methods for plotting object properties, like the image of a `LightProfile`."""
 
-aplt.LightProfile.image(light_profile=sersic_light_profile, grid=grid)
+aplt.LightProfile.figure_image(light_profile=sersic_light_profile, grid=grid)
 
 """
 **PyAutoLens** uses `MassProfile` objects to represent different mass distributions and use them to perform ray-tracing
@@ -66,10 +66,10 @@ deflections = isothermal_mass_profile.deflections_from_grid(grid=grid)
 
 """Lets plot the `MassProfile`'s convergence, potential and deflection angle map"""
 
-aplt.MassProfile.convergence(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.potential(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.deflections_y(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.deflections_x(mass_profile=isothermal_mass_profile, grid=grid)
+aplt.MassProfile.figure_convergence(mass_profile=isothermal_mass_profile, grid=grid)
+aplt.MassProfile.figure_potential(mass_profile=isothermal_mass_profile, grid=grid)
+aplt.MassProfile.figure_deflections_y(mass_profile=isothermal_mass_profile, grid=grid)
+aplt.MassProfile.figure_deflections_x(mass_profile=isothermal_mass_profile, grid=grid)
 
 """
 For anyone not familiar with gravitational lensing, don't worry about what the convergence and potential are. The key
@@ -109,17 +109,17 @@ This makes the image below, where the source`s light appears as a multiply image
 
 image = tracer.image_from_grid(grid=grid)
 
-aplt.Tracer.image(tracer=tracer, grid=grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid)
 
 """
-The Tracer plotter includes the `MassProfile` quantities we plotted previous. subplot that plots all these quantities 
+The Tracer mat_plot_2d includes the `MassProfile` quantities we plotted previous. subplot that plots all these quantities 
 simultaneously.
 """
 
-aplt.Tracer.convergence(tracer=tracer, grid=grid)
-aplt.Tracer.potential(tracer=tracer, grid=grid)
-aplt.Tracer.deflections_y(tracer=tracer, grid=grid)
-aplt.Tracer.deflections_x(tracer=tracer, grid=grid)
+aplt.Tracer.figure_convergence(tracer=tracer, grid=grid)
+aplt.Tracer.figure_potential(tracer=tracer, grid=grid)
+aplt.Tracer.figure_deflections_y(tracer=tracer, grid=grid)
+aplt.Tracer.figure_deflections_x(tracer=tracer, grid=grid)
 
 """It also includes a subplot that plots all these quantities simultaneously."""
 
@@ -197,4 +197,4 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy_0, lens_galaxy_1, source_
 
 """This is what the lens looks like:"""
 
-aplt.Tracer.image(tracer=tracer, grid=grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=grid)

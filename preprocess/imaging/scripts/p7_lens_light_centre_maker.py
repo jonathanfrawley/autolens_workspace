@@ -86,7 +86,7 @@ Now lets plot the image and lens light centre, so we can check that the centre o
 """
 
 # %%
-aplt.Array(array=image, light_profile_centres=light_centre)
+aplt.ArrayPlotter(array=image, light_profile_centres=light_centre)
 
 # %%
 """

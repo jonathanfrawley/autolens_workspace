@@ -6,7 +6,7 @@ Tutorial 5: Ray Tracing
 In the last tutorial, our use of `Plane`'s was a bit clunky. We manually had to input `Grid`'s to trace them, and keep
 track of which `Grid`'s were the image-plane`s and which were the source planes. It was easy to make mistakes!
 
-Fotunately, in **PyAutoLens**, you won't actually spend much hands-on time with the `Plane` objects. Instead, you'll
+Fortunately, in **PyAutoLens**, you won't actually spend much hands-on time with the `Plane` objects. Instead, you'll
 primarily use the `ray-tracing` module, which we'll cover in this example. Lets look at how easy it is to setup the
 same lens-plane + source-plane strong lens configuration as the previous tutorial, but with a lot less lines of code!
 """
@@ -116,7 +116,7 @@ This image appears as the Einstein ring we saw in the previous tutorial.
 """
 
 # %%
-aplt.Tracer.image(tracer=tracer, grid=image_plane_grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=image_plane_grid)
 
 # %%
 """
@@ -145,19 +145,23 @@ We can use the plane_plotter to plot these grids, like we did before.
 """
 
 # %%
-plotter = aplt.Plotter(labels=aplt.Labels(title="Image-plane Grid"))
+mat_plot_2d = aplt.MatPlot2D(labels=aplt.Labels(title="Image-plane Grid"))
 
-aplt.Plane.plane_grid(plane=tracer.image_plane, grid=traced_grids[0], plotter=plotter)
+aplt.plane.plane_grid(
+    plane=tracer.image_plane, grid=traced_grids[0], mat_plot_2d=mat_plot_2d
+)
 
-plotter = aplt.Plotter(labels=aplt.Labels(title="Source-plane Grid"))
+mat_plot_2d = aplt.MatPlot2D(labels=aplt.Labels(title="Source-plane Grid"))
 
-aplt.Plane.plane_grid(plane=tracer.source_plane, grid=traced_grids[1], plotter=plotter)
+aplt.plane.plane_grid(
+    plane=tracer.source_plane, grid=traced_grids[1], mat_plot_2d=mat_plot_2d
+)
 
-aplt.Plane.plane_grid(
+aplt.plane.plane_grid(
     plane=tracer.source_plane,
     grid=traced_grids[1],
     axis_limits=[-0.1, 0.1, -0.1, 0.1],
-    plotter=plotter,
+    mat_plot_2d=mat_plot_2d,
 )
 
 # %%
@@ -239,7 +243,7 @@ commented out again for convenience)
 """
 
 # %%
-aplt.Tracer.convergence(tracer=tracer, grid=image_plane_grid)
+aplt.Tracer.figure_convergence(tracer=tracer, grid=image_plane_grid)
 
 # aplt.Tracer.potential(tracer=tracer, grid=image_plane_grid)
 # aplt.Tracer.deflections_y(tracer=tracer, grid=image_plane_grid)

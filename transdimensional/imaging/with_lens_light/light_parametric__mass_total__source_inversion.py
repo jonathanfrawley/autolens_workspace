@@ -41,7 +41,10 @@ mask = al.Mask2D.circular(
 
 """Make a quick subplot to make sure the data looks as we expect."""
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 """
 __Settings__
@@ -107,7 +110,7 @@ This pipeline also uses a `SetupMass`, which customizes:
 
  - The `MassProfile` used to fit the lens's total mass distribution.
  - If there is an `ExternalShear` in the mass model or not (this lens was not simulated with shear and 
-   we do not include it in the mass model)..
+   we do not include_2d it in the mass model)..
  - If the centre of the `MassProfile` is aligned with the centre of the `LightProfile`'s.
 """
 

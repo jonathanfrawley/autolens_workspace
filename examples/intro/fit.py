@@ -29,15 +29,17 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.1,
 )
 
-"""We can use the `Imaging` plotter to plot the image, noise-map and psf of the dataset."""
+"""We can use the `Imaging` mat_plot_2d to plot the image, noise-map and psf of the dataset."""
 
-aplt.Imaging.image(imaging=imaging)
-aplt.Imaging.noise_map(imaging=imaging)
-aplt.Imaging.psf(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.figure_image()
+aplt.ImagingPlotter.noise_map(imaging=imaging)
+aplt.ImagingPlotter.psf(imaging=imaging)
 
-"""The `Imaging` plotter also contains a subplot which plots all these properties simultaneously."""
+"""The `Imaging` mat_plot_2d also contains a subplot which plots all these properties simultaneously."""
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 """We now need to mask the data, so that regions where there is no signal (e.g. the edges) are omitted from the fit."""
 
@@ -60,7 +62,7 @@ Here is what our image looks like with the mask applied, where PyAutoLens has au
 to make the lensed source appear bigger.
 """
 
-aplt.Imaging.image(imaging=masked_imaging)
+aplt.ImagingPlotter.image(imaging=masked_imaging)
 
 """
 Following the lensing.py example, we can make a tracer from a collection of `LightProfile`, `MassProfile` and `Galaxy`
@@ -68,7 +70,7 @@ objects.
 
 The combination of `LightProfile`'s and `MassProfile`'s below is the same as those used to generate the lensed data-set,
 thus it produces a tracer whose image looks exactly like the dataset. As discussed in the lensing.py tutorial, this
-tracer can be extended to include additional `LightProfile`'s`s, `MassProfile`'s and `Galaxy``s, for example if you 
+tracer can be extended to include_2d additional `LightProfile`'s`s, `MassProfile`'s and `Galaxy``s, for example if you 
 wanted to fit a tracer where the lens light is included.
 """
 
@@ -103,10 +105,10 @@ image with the `Imaging` PSF. We can see this by comparing the tracer`s image (w
 fit`s model image (which is).
 """
 
-aplt.Tracer.image(tracer=tracer, grid=masked_imaging.grid)
+aplt.Tracer.figure_image(tracer=tracer, grid=masked_imaging.grid)
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
-aplt.FitImaging.model_image(fit=fit)
+aplt.Fitimaging.model_image(fit=fit)
 
 """
 The fit creates the following:
@@ -121,9 +123,9 @@ For a good lens model where the model image and tracer are representative of the
 residuals, normalized residuals and chi-squareds are minimized:
 """
 
-aplt.FitImaging.residual_map(fit=fit)
-aplt.FitImaging.normalized_residual_map(fit=fit)
-aplt.FitImaging.chi_squared_map(fit=fit)
+aplt.Fitimaging.residual_map(fit=fit)
+aplt.Fitimaging.normalized_residual_map(fit=fit)
+aplt.Fitimaging.chi_squared_map(fit=fit)
 aplt.FitImaging.subplot_fit_imaging(fit=fit)
 
 """
@@ -160,7 +162,7 @@ Lets create a new fit using this tracer and replot its residuals, normalized res
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.FitImaging.residual_map(fit=fit)
-aplt.FitImaging.normalized_residual_map(fit=fit)
-aplt.FitImaging.chi_squared_map(fit=fit)
+aplt.Fitimaging.residual_map(fit=fit)
+aplt.Fitimaging.normalized_residual_map(fit=fit)
+aplt.Fitimaging.chi_squared_map(fit=fit)
 aplt.FitImaging.subplot_fit_imaging(fit=fit)

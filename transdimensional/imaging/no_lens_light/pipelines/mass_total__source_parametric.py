@@ -60,7 +60,7 @@ def make_pipeline(setup, settings):
            the pipeline.
         2) Use the source model determined from `SetupSourceParametric` (e.g. `bulge_prior_model`, `disk_prior_model`, 
            etc.)
-        3) Include an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
+        3) include_2d an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
    """
 
     phase1 = al.PhaseImaging(

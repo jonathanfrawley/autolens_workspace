@@ -70,7 +70,7 @@ However, you may not have access to the data-reduction tools that made the data,
 in PyAutoLens to convert the data to a suitable format.
 """
 
-aplt.Array(array=image)
+aplt.ArrayPlotter(array=image)
 
 # %%
 """
@@ -91,7 +91,7 @@ image_in_counts = al.Array.from_fits(
     file_path=path.join(imaging_path, "image.fits"), pixel_scales=0.1
 )
 
-aplt.Array(array=image_in_counts)
+aplt.ArrayPlotter(array=image_in_counts)
 
 # %%
 """
@@ -112,7 +112,7 @@ image_converted_to_eps = al.preprocess.array_counts_to_eps(
     array_counts=image_in_counts, exposure_time_map=exposure_time_map
 )
 
-aplt.Array(array=image_converted_to_eps)
+aplt.ArrayPlotter(array=image_converted_to_eps)
 
 """
 If the effective exposure-time map is output as part of the data reduction, you can use this to convert the image to 
@@ -129,7 +129,7 @@ image_converted_to_eps = al.preprocess.array_counts_to_eps(
     array_counts=image_in_counts, exposure_time_map=exposure_time_map
 )
 
-aplt.Array(array=image_converted_to_eps)
+aplt.ArrayPlotter(array=image_converted_to_eps)
 
 # %%
 """
@@ -145,7 +145,7 @@ image_in_adus = al.Array.from_fits(
     file_path=path.join(imaging_path, "image.fits"), pixel_scales=0.1
 )
 
-aplt.Array(array=image_in_adus)
+aplt.ArrayPlotter(array=image_in_adus)
 
 exposure_time_map = al.Array.full(
     fill_value=1000.0,
@@ -157,7 +157,7 @@ image_converted_to_eps = al.preprocess.array_adus_to_eps(
     array_adus=image_in_adus, exposure_time_map=exposure_time_map, gain=4.0
 )
 
-aplt.Array(array=image_converted_to_eps)
+aplt.ArrayPlotter(array=image_converted_to_eps)
 
 # %%
 """
@@ -183,7 +183,7 @@ image_large_stamp = al.Array.from_fits(
     file_path=path.join(imaging_path, "image.fits"), pixel_scales=0.1
 )
 
-aplt.Array(array=image_large_stamp)
+aplt.ArrayPlotter(array=image_large_stamp)
 
 # %%
 """
@@ -195,14 +195,14 @@ image_large_stamp_trimmed = al.preprocess.array_with_new_shape(
     array=image_large_stamp, new_shape=(130, 130)
 )
 
-aplt.Array(array=image_large_stamp_trimmed)
+aplt.ArrayPlotter(array=image_large_stamp_trimmed)
 
 # %%
 """
 The stamp may also be too small. It must have sufficient padding around the border that our mask includes all 
 pixels with signal. More importantly, the padding must also stretch into the `blurring region`, corresponding to all 
 unmasked image pixels where light blurs into the masks after PSF convolution. Thus, we may need to pad an image to 
-include this region.
+include_2d this region.
 """
 
 # %%
@@ -219,7 +219,7 @@ image_small_stamp = al.Array.from_fits(
     file_path=path.join(imaging_path, "image.fits"), pixel_scales=0.1
 )
 
-aplt.Array(array=image_small_stamp)
+aplt.ArrayPlotter(array=image_small_stamp)
 
 # %%
 """
@@ -234,7 +234,7 @@ mask = al.Mask2D.circular(
     radius=2.0,
 )
 
-aplt.Array(array=image_small_stamp, mask=mask)
+aplt.ArrayPlotter(array=image_small_stamp, mask=mask)
 
 # %%
 """
@@ -262,7 +262,7 @@ mask = al.Mask2D.circular(
     radius=2.0,
 )
 
-aplt.Array(array=image_small_stamp_padded, mask=mask)
+aplt.ArrayPlotter(array=image_small_stamp_padded, mask=mask)
 
 # %%
 """

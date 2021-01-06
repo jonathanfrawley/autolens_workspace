@@ -37,7 +37,10 @@ mask = al.Mask2D.circular(
     shape_2d=imaging.shape_2d, pixel_scales=imaging.pixel_scales, radius=3.0
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 """
 __Model__
@@ -71,7 +74,7 @@ The `name` and `path_prefix` below specify the path where results are stored in 
 
  `/autolens_workspace/output/examples/settings/mass_sie__source_sersic/phase_binned_up`.
 
-However, because the `SettingsPhase` include a bin_up_factor, the output path is tagged to reflelct this, meaning the
+However, because the `SettingsPhase` include_2d a bin_up_factor, the output path is tagged to reflelct this, meaning the
 full output path is:
 
  `/autolens_workspace/output/examples/settings/mass_sie__source_sersic/phase_binned_up/settings__bin_up_2`.

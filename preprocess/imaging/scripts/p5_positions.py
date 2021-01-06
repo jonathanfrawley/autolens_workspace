@@ -86,7 +86,7 @@ Now lets plot the image and positions, so we can check that the positions overla
 """
 
 # %%
-aplt.Array(array=image, positions=positions)
+aplt.ArrayPlotter(array=image, positions=positions)
 
 # %%
 """
@@ -124,4 +124,4 @@ above meaning for this figure the positions do not correspond to the source).
 """
 
 # %%
-aplt.Array(array=image, positions=positions)
+aplt.ArrayPlotter(array=image, positions=positions)

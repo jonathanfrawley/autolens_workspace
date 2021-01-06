@@ -49,7 +49,7 @@ dataset_gen = agg_filter.values("dataset")
 
 print("Datasets:")
 print(dataset_gen, "\n")
-print(list(dataset_gen)[0].image)
+print(list(dataset_gen)[0].figure_image)
 
 for dataset in agg_filter.values("dataset"):
 
@@ -240,7 +240,7 @@ for fit in fit_gen:
 # %%
 """
 The benefit of inspecting fits using the aggregator, rather than the files outputs to the hard-disk, is that we can 
-customize the plots using the PyAutoLens plotter.
+customize the plots using the PyAutoLens mat_plot_2d.
 
 Below, we create a new function to apply as a generator to do this. However, we use a convenience method available 
 in the PyAutoLens aggregator package to set up the fit.
@@ -251,7 +251,7 @@ fit_gen = al.agg.FitImaging(aggregator=agg_filter)
 
 for fit in fit_gen:
 
-    plotter = aplt.Plotter(
+    mat_plot_2d = aplt.MatPlot2D(
         figure=aplt.Figure(figsize=(12, 12)),
         labels=aplt.Labels(title="Custom Image", titlesize=24, labelsize=24, labelsize=24),
         ticks=aplt.Ticks(labelsize=24, labelsize=24),
@@ -260,7 +260,7 @@ for fit in fit_gen:
         units=aplt.Units(in_kpc=True),
     )
 
-    aplt.FitImaging.normalized_residual_map(fit=fit, plotter=plotter)
+    aplt.Fitimaging.normalized_residual_map(fit=fit, mat_plot_2d=mat_plot_2d)
 
 # %%
 """
@@ -272,11 +272,11 @@ fit_gen = al.agg.FitImaging(aggregator=agg_filter)
 
 for fit in fit_gen:
 
-    plotter = aplt.Plotter(
+    mat_plot_2d = aplt.MatPlot2D(
         labels=aplt.Labels(title="Hey"),
         output=aplt.Output(
             path=f"output/path/of/file/", filename="publication", format="png"
         ),
     )
 
-    aplt.FitImaging.normalized_residual_map(fit=fit, plotter=plotter)
+    aplt.Fitimaging.normalized_residual_map(fit=fit, mat_plot_2d=mat_plot_2d)

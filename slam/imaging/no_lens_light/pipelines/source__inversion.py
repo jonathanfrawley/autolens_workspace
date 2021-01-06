@@ -137,6 +137,7 @@ def make_pipeline(slam, settings, source_parametric_results):
         hyper_image_sky=phase1.result.instance.hyper_image_sky,
         hyper_background_noise=phase1.result.instance.hyper_background_noise,
         settings=settings,
+        use_as_hyper_dataset=True,
     )
 
     """

@@ -26,7 +26,7 @@ Phase 1:
 
 Phase 2:
 
-    Include all previously fixed lens `LightProfile` parameters in the model, initializing the `MassProflie` parameters
+    include_2d all previously fixed lens `LightProfile` parameters in the model, initializing the `MassProflie` parameters
     from the results of phase 1.
 
     Lens Light & Mass: Depends on previous Light pipeline.
@@ -91,7 +91,7 @@ def make_pipeline(slam, settings, source_results, light_results):
         results=light_results, bulge_prior_model=bulge, dark_prior_model=dark
     )
 
-    """SLaM: Include a Super-Massive Black Hole (SMBH) in the mass model is specified in `SLaMPipelineMass`."""
+    """SLaM: include_2d a Super-Massive Black Hole (SMBH) in the mass model is specified in `SLaMPipelineMass`."""
 
     smbh = slam.pipeline_mass.smbh_prior_model_from_results
 

@@ -209,7 +209,7 @@ def make_pipeline(setup, settings):
     """
     This extends phase 2 with hyper-phases that fit for the hyper-galaxies, as described above. This extension again
     adds two phases, a `hyper-galaxy` phase and `hyper_combined` phase. Unlike the extension to phase 1 which only
-    include a lens hyper-galaxy, this extension includes both the lens and source hyper-galaxy `Galaxy`'s as well as the
+    include_2d a lens hyper-galaxy, this extension includes both the lens and source hyper-galaxy `Galaxy`'s as well as the
     background noise.
     """
 

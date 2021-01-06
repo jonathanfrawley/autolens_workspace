@@ -164,7 +164,7 @@ For this runner the `SLaMPipelineSourceParametric` customizes:
 
  - The `MassProfile` fitted by the pipeline (and the following `SLaMPipelineSourceInversion`.
  - If there is an `ExternalShear` in the mass model or not (this lens was not simulated with shear and 
-   we do not include it in the mass model).
+   we do not include_2d it in the mass model).
 """
 
 setup_mass = al.SetupMassTotal(
@@ -220,7 +220,7 @@ For this runner the `SLaMPipelineMass` customizes:
 
  - The `MassProfile` fitted by the pipeline.
  - If there is an `ExternalShear` in the mass model or not (this lens was not simulated with shear and 
-   we do not include it in the mass model).
+   we do not include_2d it in the mass model).
 """
 
 setup_mass = al.SetupMassTotal(

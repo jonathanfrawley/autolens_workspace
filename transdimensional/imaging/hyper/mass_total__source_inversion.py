@@ -10,7 +10,7 @@ of previous phases in a pipeline to later phases, and uses these images (called 
 - Adapt a pixelization`s grid to the surface-brightness of the source galaxy.
 - Adapt the `Regularization` scheme to the surface-brightness of the source galaxy.
 - Scale the noise in regions of the image where the model give a poor fit (in both the lens and source galaxies).
-- Include uncertanties in the data-reduction into the model, such as the background sky level.
+- include_2d uncertanties in the data-reduction into the model, such as the background sky level.
 
 This uses the pipeline (Check it out full description of the pipeline):
 
@@ -43,7 +43,10 @@ mask = al.Mask2D.circular(
 
 """Make a quick subplot to make sure the data looks as we expect."""
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 """
 __Settings__

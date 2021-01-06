@@ -1,7 +1,7 @@
 """
 __Preprocess 6: - Info and Pickles (Optional)__
 
-Here, we include auxiliary information about our strong lens dataset that we may use during an analysis or when
+Here, we include_2d auxiliary information about our strong lens dataset that we may use during an analysis or when
 interpreting the lens modeling results.
 
 The most obvious example of such information is the redshifts of the source and lens galaxy. By storing these as an
@@ -59,7 +59,7 @@ dataset_path = path.join("dataset", dataset_type, dataset_label, dataset_name)
 # %%
 """
 The info is written as a Python dictionary and can have as many entries as desired added to it. Any information you
-want to include int he interpretation of your lens models should be included here.
+want to include_2d int he interpretation of your lens models should be included here.
 """
 
 info = {

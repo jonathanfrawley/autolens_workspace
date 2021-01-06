@@ -70,7 +70,7 @@ image = al.Array.from_fits(
     file_path=path.join(dataset_path, "image.fits"), pixel_scales=pixel_scales
 )
 
-aplt.Array(array=image)
+aplt.ArrayPlotter(array=image)
 
 # %%
 """
@@ -82,7 +82,7 @@ noise_map = al.Array.from_fits(
     file_path=path.join(dataset_path, "noise_map.fits"), pixel_scales=pixel_scales
 )
 
-aplt.Array(array=noise_map)
+aplt.ArrayPlotter(array=noise_map)
 
 # %%
 """
@@ -90,7 +90,7 @@ Now lets plot the signal to noise-map, which will be reduced to nearly zero one 
 """
 
 # %%
-aplt.Array(array=image / noise_map)
+aplt.ArrayPlotter(array=image / noise_map)
 
 # %%
 """
@@ -147,7 +147,7 @@ The new image is plotted for inspection.
 """
 
 # %%
-aplt.Array(array=image)
+aplt.ArrayPlotter(array=image)
 
 # %%
 """
@@ -176,8 +176,8 @@ The noise-map and signal to noise-map show the noise-map being scaled in the cor
 """
 
 # %%
-aplt.Array(array=noise_map)
-aplt.Array(array=image / noise_map.in_1d)
+aplt.ArrayPlotter(array=noise_map)
+aplt.ArrayPlotter(array=image / noise_map.in_1d)
 
 # %%
 """

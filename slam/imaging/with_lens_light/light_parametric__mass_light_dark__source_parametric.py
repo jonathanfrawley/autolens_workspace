@@ -46,7 +46,10 @@ mask = al.Mask2D.circular(
     shape_2d=imaging.shape_2d, pixel_scales=pixel_scales, radius=3.0
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 """
 __Settings__
@@ -142,7 +145,7 @@ setup_light = al.SetupLightParametric()
  For this runner the `SetupMassProfile` customizes:
 
  - That the mass of the lens `Galaxy` is fitted using an `EllipticalIsothermal`.
- - That there is not `ExternalShear` in the mass model (this lens was not simulated with shear and we do not include 
+ - That there is not `ExternalShear` in the mass model (this lens was not simulated with shear and we do not include_2d 
  it in the mass model).
  - That the mass profile centre is (0.0, 0.0) (this assumption will be relaxed in the SLaM Mass Pipeline.
 """

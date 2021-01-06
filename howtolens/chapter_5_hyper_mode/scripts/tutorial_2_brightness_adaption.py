@@ -92,11 +92,12 @@ Lets have a quick look to make sure it has the same residuals we saw in tutorial
 
 # %%
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -137,11 +138,12 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy_brightness
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
 aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include=aplt.Include(inversion_image_pixelization_grid=True, mask=True)
+    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -229,7 +231,7 @@ cluster_weight_power_0 = source_weight_power_0.pixelization.weight_map_from_hype
     hyper_image=source_weight_power_0.hyper_galaxy_image
 )
 
-aplt.Array(array=cluster_weight_power_0, mask=mask)
+aplt.ArrayPlotter(array=cluster_weight_power_0, mask=mask)
 
 source_weight_power_5 = al.Galaxy(
     redshift=1.0,
@@ -245,7 +247,7 @@ cluster_weight_power_5 = source_weight_power_5.pixelization.weight_map_from_hype
     hyper_image=source_weight_power_5.hyper_galaxy_image
 )
 
-aplt.Array(array=cluster_weight_power_5, mask=mask)
+aplt.ArrayPlotter(array=cluster_weight_power_5, mask=mask)
 
 source_weight_power_10 = al.Galaxy(
     redshift=1.0,
@@ -261,7 +263,7 @@ cluster_weight_power_10 = source_weight_power_10.pixelization.weight_map_from_hy
     hyper_image=source_weight_power_10.hyper_galaxy_image
 )
 
-aplt.Array(array=cluster_weight_power_10, mask=mask)
+aplt.ArrayPlotter(array=cluster_weight_power_10, mask=mask)
 
 # %%
 """
@@ -275,24 +277,27 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_0])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_5])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_10])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -321,14 +326,15 @@ cluster_weight_floor = source_weight_floor.pixelization.weight_map_from_hyper_im
     hyper_image=source_weight_floor.hyper_galaxy_image
 )
 
-aplt.Array(array=cluster_weight_floor, mask=mask)
+aplt.ArrayPlotter(array=cluster_weight_floor, mask=mask)
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_floor])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.reconstruction(
-    inversion=fit.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%

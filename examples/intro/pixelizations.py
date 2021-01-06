@@ -33,7 +33,8 @@ imaging = al.Imaging.from_fits(
     pixel_scales=0.05,
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging)
+imaging_plotter = aplt.ImagingPlotter(imaging=imaging)
+imaging_plotter.subplot_imaging()
 
 """We are going to fit this data, so we must create `Mask2D` and `MaskImaging` objects."""
 
@@ -79,7 +80,7 @@ fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
 """
 The fit has been performed using an `Inversion` for the source galaxy. We can see this by plotting the source-plane
-of the `FitImaging` using the `subplot_of_plane` plotter. Note how the bottom-right panel shows a pixelized grid.
+of the `FitImaging` using the `subplot_of_plane` mat_plot_2d. Note how the bottom-right panel shows a pixelized grid.
 """
 
 aplt.FitImaging.subplot_of_plane(fit=fit, plane_index=1)

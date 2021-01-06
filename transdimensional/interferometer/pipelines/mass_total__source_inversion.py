@@ -72,7 +72,7 @@ def make_pipeline(setup, settings, real_space_mask):
 
         1) Use an `EllipticalIsothermal` for the lens's mass and `EllipticalSersic`for the source's bulge, 
            irrespective of the final model that is fitted by the pipeline.
-        2) Include an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
+        2) include_2d an `ExternalShear` in the mass model if `SetupMass.with_shear=True`.
     """
 
     phase1 = al.PhaseInterferometer(

@@ -49,7 +49,10 @@ mask = al.Mask2D.circular(
     shape_2d=imaging.shape_2d, pixel_scales=imaging.pixel_scales, radius=3.0
 )
 
-aplt.Imaging.subplot_imaging(imaging=imaging, mask=mask)
+imaging_plotter = aplt.ImagingPlotter(
+    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+imaging_plotter.subplot_imaging()
 
 """
 __Model__
@@ -83,7 +86,7 @@ The `name` and `path_prefix` below specify the path where results are stored in 
 
  `/autolens_workspace/output/examples/settings/mass_sie__source_sersic/phase_signal_to_noise_limit`.
 
-However, because the `SettingsPhase` include a signal_to_noise_limit, the output path is tagged to reflelct this, 
+However, because the `SettingsPhase` include_2d a signal_to_noise_limit, the output path is tagged to reflelct this, 
 meaning the full output path is:
 
  `/autolens_workspace/output/examples/settings/mass_sie__source_sersic/phase_signal_to_noise_limit/settings__snr_10`.

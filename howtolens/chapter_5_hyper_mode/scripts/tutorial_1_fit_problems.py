@@ -205,11 +205,12 @@ fit_flat = fit_imaging_with_voronoi_magnification_pixelization(
 
 aplt.FitImaging.subplot_fit_imaging(
     fit=fit_flat,
-    include=aplt.Include(inversion_image_pixelization_grid=True, mask=True),
+    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
 )
 
-aplt.Inversion.reconstruction(
-    inversion=fit_flat.inversion, include=aplt.Include(inversion_pixelization_grid=True)
+aplt.Inversion.figure_reconstruction(
+    inversion=fit_flat.inversion,
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 print(fit_flat.log_evidence)
@@ -229,12 +230,12 @@ fit_compact = fit_imaging_with_voronoi_magnification_pixelization(
 
 aplt.FitImaging.subplot_fit_imaging(
     fit=fit_compact,
-    include=aplt.Include(inversion_image_pixelization_grid=True, mask=True),
+    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
 )
 
-aplt.Inversion.reconstruction(
+aplt.Inversion.figure_reconstruction(
     inversion=fit_compact.inversion,
-    include=aplt.Include(inversion_pixelization_grid=True),
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 print(fit_compact.log_evidence)
@@ -258,12 +259,12 @@ fit_super_compact = fit_imaging_with_voronoi_magnification_pixelization(
 
 aplt.FitImaging.subplot_fit_imaging(
     fit=fit_super_compact,
-    include=aplt.Include(inversion_image_pixelization_grid=True, mask=True),
+    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
 )
 
-aplt.Inversion.reconstruction(
+aplt.Inversion.figure_reconstruction(
     inversion=fit_super_compact.inversion,
-    include=aplt.Include(inversion_pixelization_grid=True),
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 print(fit_super_compact.log_evidence)
@@ -301,9 +302,9 @@ whether it is reconstructing the bright central regions of the source or its fai
 """
 
 # %%
-aplt.Inversion.regularization_weights(
+aplt.Inversion.figure_regularization_weights(
     inversion=fit_compact.inversion,
-    include=aplt.Include(inversion_pixelization_grid=True),
+    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
 )
 
 # %%
@@ -339,7 +340,7 @@ why we might want to scale its variances. Lets look at the super-compact fit aga
 # %%
 aplt.FitImaging.subplot_fit_imaging(
     fit=fit_super_compact,
-    include=aplt.Include(inversion_image_pixelization_grid=True, mask=True),
+    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
 )
 
 # %%
