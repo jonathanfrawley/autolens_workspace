@@ -69,7 +69,10 @@ sersic_light_profile = al.lp.EllipticalExponential(
     centre=(0.3, 0.2), elliptical_comps=(0.2, 0.0), intensity=0.05, effective_radius=1.0
 )
 
-aplt.LightProfile.figure_image(light_profile=sersic_light_profile, grid=grid)
+light_profile_plotter = aplt.LightProfilePlotter(
+    light_profile=sersic_light_profile, grid=grid
+)
+light_profile_plotter.figure_image()
 
 input(
     "\n"
@@ -93,10 +96,13 @@ isothermal_mass_profile = al.mp.EllipticalIsothermal(
     centre=(0.0, 0.0), elliptical_comps=(0.1, 0.0), einstein_radius=1.6
 )
 
-aplt.MassProfile.figure_convergence(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.figure_potential(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.figure_deflections_y(mass_profile=isothermal_mass_profile, grid=grid)
-aplt.MassProfile.figure_deflections_x(mass_profile=isothermal_mass_profile, grid=grid)
+mass_profile_plotter = aplt.MassProfilePlotter(
+    mass_profile=isothermal_mass_profile, grid=grid
+)
+mass_profile_plotter.figure_convergence()
+mass_profile_plotter.figure_potential()
+mass_profile_plotter.figure_deflections_y()
+mass_profile_plotter.figure_deflections_x()
 
 input(
     "\n"
@@ -121,7 +127,8 @@ tracer = al.Tracer.from_galaxies(
     galaxies=[lens_galaxy, source_galaxy], cosmology=cosmo.Planck15
 )
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 input(
     "\n"

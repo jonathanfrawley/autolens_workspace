@@ -36,7 +36,7 @@ To plot the positions this object wraps the following matplotlib method:
 
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
-positions_scatter = aplt.PositionsScatter(marker="o", colors="r", s=50)
+positions_scatter = aplt.PositionsScatter(marker="o", c="r", s=50)
 
 mat_plot_2d = aplt.MatPlot2D(positions_scatter=positions_scatter)
 

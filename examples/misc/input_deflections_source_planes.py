@@ -134,7 +134,8 @@ source_galaxy = al.Galaxy(
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 source_plane_grid = tracer.traced_grids_of_planes_from_grid(grid=grid)[-1]
 aplt.plane.plane_image(plane=tracer.source_plane, grid=source_plane_grid)
 

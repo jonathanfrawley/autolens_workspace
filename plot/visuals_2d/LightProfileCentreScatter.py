@@ -60,7 +60,7 @@ To plot the light profile centres this object wraps the following matplotlib met
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
 light_profile_centres_scatter = aplt.LightProfileCentresScatter(
-    marker="o", colors="r", s=150
+    marker="o", c="r", s=150
 )
 mat_plot_2d = aplt.MatPlot2D(
     light_profile_centres_scatter=light_profile_centres_scatter
@@ -75,9 +75,7 @@ By specifying two colors to the `LightProfileCentresScatter` object the light pr
 are plotted in different colors.
 """
 
-light_profile_centres_scatter = aplt.LightProfileCentresScatter(
-    colors=["r", "w"], s=150
-)
+light_profile_centres_scatter = aplt.LightProfileCentresScatter(c=["r", "w"], s=150)
 mat_plot_2d = aplt.MatPlot2D(
     light_profile_centres_scatter=light_profile_centres_scatter
 )

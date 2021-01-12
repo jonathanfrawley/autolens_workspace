@@ -24,7 +24,7 @@ dataset_name = "mass_sie__subhalo_nfw__source_sersic"
 
 """
 The path where the dataset will be output, which in this case is
-`/autolens_workspace/dataset/interferometer/mass_sie__subhalo_nfw__source_bulge`
+`/autolens_workspace/dataset/interferometer/mass_sie__subhalo_nfw__source_sersic`
 """
 
 dataset_path = path.join("dataset", dataset_type, dataset_name)
@@ -107,7 +107,8 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
 """Lets look at the tracer`s image - this is the image we'll be simulating."""
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an

@@ -39,7 +39,7 @@ To plot the mask this object wraps the following matplotlib method:
 
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
-mask_scatter = aplt.MaskScatter(marker="o", colors="r", s=50)
+mask_scatter = aplt.MaskScatter(marker="o", c="r", s=50)
 
 mat_plot_2d = aplt.MatPlot2D(mask_scatter=mask_scatter)
 

@@ -24,7 +24,7 @@ dataset_name = "mass_sie__source_sersic_x2"
 
 """
 The path where the dataset will be output, which in this case is:
-`/autolens_workspace/dataset/imaging/no_lens_light/mass_total__source_bulge_x2/`
+`/autolens_workspace/dataset/imaging/no_lens_light/mass_sie__source_sersic_x2/`
 """
 
 dataset_path = path.join("dataset", dataset_type, dataset_label, dataset_name)
@@ -110,7 +110,8 @@ tracer = al.Tracer.from_galaxies(
 
 """Lets look at the tracer`s image - this is the image we'll be simulating."""
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an

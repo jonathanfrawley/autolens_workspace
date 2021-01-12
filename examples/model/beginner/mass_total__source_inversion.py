@@ -3,10 +3,6 @@ __Example: Modeling__
 
 To fit a lens model to a dataset, we must perform lens modeling, which uses a `NonLinearSearch` to fit many
 different tracers to the dataset.
-
-Model-fitting is handled by our project **PyAutoFit**, a probabilistic programming language for non-linear model
-fitting. The setting up of configuration files is performed by our project **PyAutoConf**. we'll need to import
-both to perform the model-fit.
 """
 
 """
@@ -165,7 +161,7 @@ search = af.DynestyStatic(
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings and search to create and run a phase, fitting our data with
 the lens model.
 """
 
@@ -197,10 +193,12 @@ It also contains instances of the maximum log likelihood Tracer and FitImaging, 
 the fit.
 """
 
-aplt.Tracer.subplot_tracer(
+tracer_plotter = aplt.TracerPlotter(
     tracer=result.max_log_likelihood_tracer, grid=mask.geometry.masked_grid_sub_1
 )
-aplt.FitImaging.subplot_fit_imaging(fit=result.max_log_likelihood_fit)
+tracer_plotter.subplot_tracer()
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 """
 Checkout `/path/to/autolens_workspace/examples/model/results.py` for a full description of the result object.

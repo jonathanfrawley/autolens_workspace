@@ -53,7 +53,7 @@ imaging = al.Imaging.from_fits(
 """
 The model-fit also requires a mask, which defines the regions of the image we use to fit the lens model to the data.
 
-We can easily check the image-positions are accurate by plotting them using our `Imaging` `Plotter`.(they are the 
+We can easily check the image-positions are accurate by plotting them using our `ImagingPlotter`.(they are the 
 black dots on the image).
 """
 
@@ -148,7 +148,7 @@ search = af.DynestyStatic(
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings and search to create and run a phase, fitting our data with
 the lens model.
 """
 

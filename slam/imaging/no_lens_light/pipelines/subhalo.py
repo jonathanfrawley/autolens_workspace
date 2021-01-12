@@ -78,7 +78,7 @@ def make_pipeline_single_plane(slam, settings, mass_results):
         2) The lens galaxy mass model includes an  `ExternalShear`.
     """
 
-    path_prefix = path.join(
+    path_prefix = slam.path_prefix_from(
         slam.path_prefix,
         pipeline_name,
         slam.source_tag,
@@ -177,7 +177,9 @@ def make_pipeline_single_plane(slam, settings, mass_results):
             facc=0.2,
         ),
         galaxies=af.CollectionPriorModel(lens=lens, subhalo=subhalo, source=source),
-        hyper_image_sky=phase1.result.instance.optional.hyper_image_sky,
+        hyper_image_sky=slam.setup_hyper.hyper_image_sky_from_result(
+            result=phase1.result, as_model=True
+        ),
         hyper_background_noise=phase1.result.hyper.instance.optional.hyper_background_noise,
         settings=settings,
         number_of_steps=slam.setup_subhalo.grid_size,
@@ -229,7 +231,7 @@ def make_pipeline_multi_plane(slam, settings, mass_results):
         2) The lens galaxy mass model includes an  `ExternalShear`.
     """
 
-    path_prefix = path.join(
+    path_prefix = slam.path_prefix_from(
         slam.path_prefix,
         pipeline_name,
         slam.source_tag,

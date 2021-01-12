@@ -112,7 +112,8 @@ source_galaxy = al.Galaxy(
 """Use these galaxies to setup a tracer, which will generate the image for the simulated `Imaging` dataset."""
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can then pass this simulator a tracer, which uses the tracer to create a ray-traced image which is simulated as

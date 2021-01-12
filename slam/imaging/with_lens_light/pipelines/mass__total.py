@@ -40,7 +40,7 @@ def make_pipeline(slam, settings, source_results, light_results):
         3) The lens`s light model is fixed or variable.
     """
 
-    path_prefix = path.join(
+    path_prefix = slam.path_prefix_from(
         slam.path_prefix,
         pipeline_name,
         slam.source_tag,
@@ -62,7 +62,7 @@ def make_pipeline(slam, settings, source_results, light_results):
     """
 
     mass = slam.pipeline_mass.setup_mass.mass_prior_model_with_updated_priors_from_result(
-        result=source_results.last, unfix_mass_centre=True
+        result=source_results[-2], unfix_mass_centre=True
     )
 
     """SLaM: Use the source and lens light models from the previous *Source* and *Light* pipelines."""

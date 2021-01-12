@@ -108,9 +108,10 @@ fit = fit_masked_imaging_with_lens_and_source_galaxy(
 
 print("Evidence using baseline variances = ", fit.log_evidence)
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+include_2d = aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
+
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -182,26 +183,25 @@ fit = fit_masked_imaging_with_lens_and_source_galaxy(
     lens_galaxy=lens_galaxy,
     source_galaxy=source_magnification,
 )
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 lens_contribution_map = lens_galaxy_hyper.hyper_galaxy.contribution_map_from_hyper_images(
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image_lens
 )
 
-aplt.ArrayPlotter(
-    array=lens_contribution_map,
-    mask=mask,
-    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Lens Contribution Map")),
-)
+
+array_plotter = aplt.ArrayPlotter(array=lens_contribution_map)
+array_plotter.set_title("Lens Contribution Map")
+array_plotter.figure_array()
 
 source_contribution_map = source_magnification_hyper.hyper_galaxy.contribution_map_from_hyper_images(
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image_source
 )
 
-aplt.ArrayPlotter(
-    array=source_contribution_map,
-    mask=mask,
-    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Source Contribution Map")),
-)
+array_plotter = aplt.ArrayPlotter(array=source_contribution_map)
+array_plotter.set_title("Source Contribution Map")
+array_plotter.figure_array()
 
 # %%
 """
@@ -218,9 +218,8 @@ fit = fit_masked_imaging_with_lens_and_source_galaxy(
     source_galaxy=source_magnification_hyper,
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 print("Evidence using baseline variances = ", 3356.88)
 
@@ -277,9 +276,8 @@ al.FitImaging(
     hyper_background_noise=hyper_background_noise,
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """

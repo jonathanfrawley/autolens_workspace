@@ -31,7 +31,7 @@ We now pass the tracer` and grid to a `TracerPlotter` and call various `figure_*
 tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
 tracer_plotter.figure_image()
 tracer_plotter.figure_convergence()
-# tracer_plotter.figure_potential()
+tracer_plotter.figure_potential()
 tracer_plotter.figure_deflections_y()
 tracer_plotter.figure_deflections_x()
 tracer_plotter.figure_magnification()

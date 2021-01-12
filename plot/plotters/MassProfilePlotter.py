@@ -23,7 +23,7 @@ plot different attributes.
 
 mass_profile_plotter = aplt.MassProfilePlotter(mass_profile=mass, grid=grid)
 mass_profile_plotter.figure_convergence()
-# mass_profile_plotter.figure_potential()
+mass_profile_plotter.figure_potential()
 mass_profile_plotter.figure_deflections_y()
 mass_profile_plotter.figure_deflections_x()
 mass_profile_plotter.figure_magnification()

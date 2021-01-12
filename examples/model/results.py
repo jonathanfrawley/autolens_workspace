@@ -66,10 +66,12 @@ Great, so we have the `Result` object we'll cover in this script. As a reminder,
 `max_log_likelihood_tracer` and `max_log_likelihood_fit` to plot the results of the fit:
 """
 
-aplt.Tracer.subplot_tracer(
+tracer_plotter = aplt.TracerPlotter(
     tracer=result.max_log_likelihood_tracer, grid=mask.geometry.masked_grid_sub_1
 )
-aplt.FitImaging.subplot_fit_imaging(fit=result.max_log_likelihood_fit)
+tracer_plotter.subplot_tracer()
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 """
 The result contains a lot more information about the model-fit. 

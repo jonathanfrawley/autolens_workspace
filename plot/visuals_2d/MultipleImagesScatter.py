@@ -47,7 +47,7 @@ To plot the multiple images this object wraps the following matplotlib method:
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
 
-multiple_images_scatter = aplt.MultipleImagesScatter(marker="o", colors="r", s=150)
+multiple_images_scatter = aplt.MultipleImagesScatter(marker="o", c="r", s=150)
 
 mat_plot_2d = aplt.MatPlot2D(multiple_images_scatter=multiple_images_scatter)
 
@@ -62,7 +62,7 @@ would be plotted in different colors (note how the `Galaxy` objects we created a
 each therefore had its own `Plane` in the `Tracer`).
 """
 
-multiple_images_scatter = aplt.MultipleImagesScatter(colors=["r", "w"], s=150)
+multiple_images_scatter = aplt.MultipleImagesScatter(c=["r", "w"], s=150)
 
 mat_plot_2d = aplt.MatPlot2D(multiple_images_scatter=multiple_images_scatter)
 

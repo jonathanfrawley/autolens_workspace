@@ -84,7 +84,7 @@ search = af.DynestyStatic(
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings and search to create and run a phase, fitting our data with
 the lens model.
 """
 

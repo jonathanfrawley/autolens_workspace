@@ -41,7 +41,7 @@ To plot the border this object wraps the following matplotlib method:
 
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
-border_scatter = aplt.BorderScatter(marker="o", colors="r", s=50)
+border_scatter = aplt.BorderScatter(marker="o", c="r", s=50)
 
 mat_plot_2d = aplt.MatPlot2D(border_scatter=border_scatter)
 

@@ -41,7 +41,7 @@ To plot the caustics this object wraps the following matplotlib method:
  https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.plot.html
 """
 
-caustics_plot = aplt.CausticsPlot(linestyle="--", linewidth=10, colors="r")
+caustics_plot = aplt.CausticsPlot(linestyle="--", linewidth=10, c="r")
 
 mat_plot_2d = aplt.MatPlot2D(caustics_plot=caustics_plot)
 
@@ -58,7 +58,7 @@ By default, PyAutoLens uses the same alternating colors for the caustics and cau
 appear the same color on image-plane and source-plane figures.
 """
 
-caustics_plot = aplt.CausticsPlot(colors=["r", "w"])
+caustics_plot = aplt.CausticsPlot(c=["r", "w"])
 
 mat_plot_2d = aplt.MatPlot2D(caustics_plot=caustics_plot)
 

@@ -66,7 +66,8 @@ source_galaxy = al.Galaxy(
 """Use these galaxies to setup a tracer, which will generate the image for the simulated `Imaging` dataset."""
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an
@@ -136,7 +137,8 @@ source_galaxy = al.Galaxy(
 """Use these galaxies to setup a tracer, which will generate the image for the simulated `Imaging` dataset."""
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an
@@ -207,7 +209,8 @@ source_galaxy = al.Galaxy(
 """Use these galaxies to setup a tracer, which will generate the image for the simulated `Imaging` dataset."""
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
 
-aplt.Tracer.figure_image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
 We can now pass this simulator a tracer, which creates the ray-traced image plotted above and simulates it as an

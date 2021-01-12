@@ -203,15 +203,12 @@ fit_flat = fit_imaging_with_voronoi_magnification_pixelization(
     imaging=imaging_source_flat, mask=mask, regularization_coefficient=9.2
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit_flat,
-    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
-)
+include_2d = aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit_flat.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit_flat, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
+fit_imaging_plotter.subplot_of_plane(plane_index=1)
+
 
 print(fit_flat.log_evidence)
 
@@ -228,15 +225,9 @@ fit_compact = fit_imaging_with_voronoi_magnification_pixelization(
     imaging=imaging_source_compact, mask=mask, regularization_coefficient=3.3
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit_compact,
-    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
-)
-
-aplt.Inversion.figure_reconstruction(
-    inversion=fit_compact.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit_compact, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
+fit_imaging_plotter.subplot_of_plane(plane_index=1)
 
 print(fit_compact.log_evidence)
 
@@ -257,15 +248,11 @@ fit_super_compact = fit_imaging_with_voronoi_magnification_pixelization(
     imaging=imaging_source_super_compact, mask=mask, regularization_coefficient=3.1
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit_super_compact,
-    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
+fit_imaging_plotter = aplt.FitImagingPlotter(
+    fit=fit_super_compact, include_2d=include_2d
 )
-
-aplt.Inversion.figure_reconstruction(
-    inversion=fit_super_compact.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter.subplot_fit_imaging()
+fit_imaging_plotter.subplot_of_plane(plane_index=1)
 
 print(fit_super_compact.log_evidence)
 
@@ -299,13 +286,17 @@ Regularization also causes problems. When using a `Constant` `Regularization` sc
 adding up the difference in fluxes between all source-pixels multiplied by one single value of a `Regularization`
 coefficient. This means that, every single source pixel receives the same `level` of `Regularization`, regardless of 
 whether it is reconstructing the bright central regions of the source or its faint exterior regions. Lets look:
+
+NOTE: Here we are going to use a trick to plot the `regularization_weights`. The `FitImagingPlotter` does not have a
+method that is able to plot this attribute of the `Inversion`. However, the `FitImagingPlotter` has its own 
+`InversionPlotter` which we can use to make this plot. The benefit of using this is that it inherits from the
+`FitImagingPlotter` properties like the caustics, so they appear on the figure (this would not happen if we
+manually set up an `InversionPlotter` as we did in previous tutorials.
 """
 
 # %%
-aplt.Inversion.figure_regularization_weights(
-    inversion=fit_compact.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+inversion_plotter = fit_imaging_plotter.inversion_plotter
+inversion_plotter.figure_regularization_weights()
 
 # %%
 """
@@ -338,10 +329,7 @@ why we might want to scale its variances. Lets look at the super-compact fit aga
 """
 
 # %%
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit_super_compact,
-    include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True),
-)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """

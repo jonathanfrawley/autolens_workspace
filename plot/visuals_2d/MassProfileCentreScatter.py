@@ -54,9 +54,7 @@ To plot the mass profile centres this object wraps the following matplotlib meth
 
  https://matplotlib.org/3.2.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
-mass_profile_centres_scatter = aplt.MassProfileCentresScatter(
-    marker="o", colors="r", s=150
-)
+mass_profile_centres_scatter = aplt.MassProfileCentresScatter(marker="o", c="r", s=150)
 mat_plot_2d = aplt.MatPlot2D(mass_profile_centres_scatter=mass_profile_centres_scatter)
 tracer_plotter = aplt.TracerPlotter(
     tracer=tracer, grid=grid, include_2d=include_2d, mat_plot_2d=mat_plot_2d
@@ -68,7 +66,7 @@ By specifying two colors to the `MassProfileCentresScatter` object the mass prof
 are plotted in different colors.
 """
 
-mass_profile_centres_scatter = aplt.MassProfileCentresScatter(colors=["r", "w"], s=150)
+mass_profile_centres_scatter = aplt.MassProfileCentresScatter(c=["r", "w"], s=150)
 
 mat_plot_2d = aplt.MatPlot2D(mass_profile_centres_scatter=mass_profile_centres_scatter)
 

@@ -101,14 +101,13 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_magnification
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+include_2d = aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
+
+inversion_plotter = fit_imaging_plotter.inversion_plotter
+inversion_plotter.figure_reconstruction()
 
 # %%
 """
@@ -148,14 +147,11 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_adaptive
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+inversion_plotter = fit_imaging_plotter.inversion_plotter
+inversion_plotter.figure_reconstruction()
 
 print("Evidence = ", fit.log_evidence)
 
@@ -212,9 +208,8 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_hyper_galaxy
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -265,11 +260,10 @@ contribution_map = source_contribution_factor_1.hyper_galaxy.contribution_map_fr
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.ArrayPlotter(
-    array=contribution_map,
-    mask=mask,
-    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
-)
+mat_plot_2d = aplt.MatPlot2D(title=aplt.Title(label="Contribution Map"))
+
+array_plotter = aplt.ArrayPlotter(array=contribution_map, mat_plot_2d=mat_plot_2d)
+array_plotter.figure_array()
 
 source_contribution_factor_3 = al.Galaxy(
     redshift=1.0,
@@ -283,11 +277,8 @@ contribution_map = source_contribution_factor_3.hyper_galaxy.contribution_map_fr
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.ArrayPlotter(
-    array=contribution_map,
-    mask=mask,
-    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
-)
+array_plotter = aplt.ArrayPlotter(array=contribution_map, mat_plot_2d=mat_plot_2d)
+array_plotter.figure_array()
 
 source_hyper_galaxy = al.Galaxy(
     redshift=1.0,
@@ -301,11 +292,8 @@ contribution_map = source_hyper_galaxy.hyper_galaxy.contribution_map_from_hyper_
     hyper_model_image=hyper_image, hyper_galaxy_image=hyper_image
 )
 
-aplt.ArrayPlotter(
-    array=contribution_map,
-    mask=mask,
-    mat_plot_2d=aplt.MatPlot2D(labels=aplt.Labels(title="Contribution Map")),
-)
+array_plotter = aplt.ArrayPlotter(array=contribution_map, mat_plot_2d=mat_plot_2d)
+array_plotter.figure_array()
 
 # %%
 """
@@ -343,9 +331,8 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_no_hyper_galaxy
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 
 print("Evidence using baseline variances = ", fit.log_evidence)
@@ -369,9 +356,8 @@ fit = fit_masked_imaging_with_source_galaxy(
     masked_imaging=masked_imaging, source_galaxy=source_hyper_galaxy
 )
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
 
 
 print("Evidence using variances scaling by hyper-galaxy = ", fit.log_evidence)

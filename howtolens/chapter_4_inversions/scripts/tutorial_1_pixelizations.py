@@ -76,15 +76,13 @@ By plotting our mapper, we now see our `Pixelization`. Its a fairly boring `Grid
 """
 
 # %%
-aplt.MapperObj(
-    mapper=mapper,
-    include_2d=aplt.Include2D(
-        inversion_grid=False, mapper_source_pixelization_grid=False
-    ),
-    mat_plot_2d=aplt.MatPlot2D(
-        labels=aplt.Labels(title="Fairly Boring Grid of Rectangular Pixels")
-    ),
+include_2d = aplt.Include2D(
+    mapper_source_full_grid=False, mapper_source_pixelization_grid=False
 )
+
+mapper_plotter = aplt.MapperPlotter(mapper=mapper, include_2d=include_2d)
+mapper_plotter.set_title("Fairly Boring Grid of Rectangular Pixels")
+mapper_plotter.figure_mapper()
 
 # %%
 """
@@ -107,15 +105,13 @@ Infact, we can plot these centre on our `Grid` - to make it look slightly less b
 """
 
 # %%
-aplt.MapperObj(
-    mapper=mapper,
-    include_2d=aplt.Include2D(
-        inversion_grid=False, mapper_source_pixelization_grid=True
-    ),
-    mat_plot_2d=aplt.MatPlot2D(
-        labels=aplt.Labels(title="Slightly less Boring Grid of Rectangular Pixels")
-    ),
+include_2d = aplt.Include2D(
+    mapper_source_full_grid=False, mapper_source_pixelization_grid=False
 )
+
+mapper_plotter = aplt.MapperPlotter(mapper=mapper, include_2d=include_2d)
+mapper_plotter.set_title("Slightly less Boring Grid of Rectangular Pixels")
+mapper_plotter.figure_mapper()
 
 # %%
 """
@@ -137,15 +133,13 @@ We can over-lay the `Grid` on top. Its starting to look a bit less boring now!
 """
 
 # %%
-aplt.MapperObj(
-    mapper=mapper,
-    include_2d=aplt.Include2D(
-        inversion_grid=True, mapper_source_pixelization_grid=True
-    ),
-    mat_plot_2d=aplt.MatPlot2D(
-        labels=aplt.Labels(title="Even less Boring Grid of Rectangular Pixels")
-    ),
+include_2d = aplt.Include2D(
+    mapper_source_full_grid=True, mapper_source_pixelization_grid=True
 )
+
+mapper_plotter = aplt.MapperPlotter(mapper=mapper, include_2d=include_2d)
+mapper_plotter.set_title("Even less Boring Grid of Rectangular Pixels")
+mapper_plotter.figure_mapper()
 
 # %%
 """

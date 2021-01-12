@@ -33,10 +33,11 @@ lens_galaxy = al.Galaxy(
         effective_radius=0.8,
         sersic_index=4.0,
     ),
-    mass=al.mp.EllipticalIsothermal(
+    mass=al.mp.EllipticalPowerLaw(
         centre=(0.0, 0.0),
         einstein_radius=1.6,
         elliptical_comps=al.convert.elliptical_comps_from(axis_ratio=0.8, phi=45.0),
+        slope=2.5,
     ),
     shear=al.mp.ExternalShear(elliptical_comps=(0.0, 0.05)),
 )
@@ -78,7 +79,7 @@ fit_imaging_plotter.figure_subtracted_image_of_plane(plane_index=0)
 fit_imaging_plotter.figure_subtracted_image_of_plane(plane_index=1)
 
 """
-It can also plot the plane-image of a plane, that is what the source galaxy looks like without lensing (e.g. 
+It can also plot the plane-image of a plane, that is what the source galaxy looks like without lensing (e.g.
 for `plane_index=1` this is the source-plane image)
 """
 fit_imaging_plotter.figure_plane_image_of_plane(plane_index=0)
@@ -104,3 +105,49 @@ fit_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
 fit_plotter.subplot_fit_imaging()
 fit_plotter.subplot_of_plane(plane_index=0)
 fit_plotter.subplot_of_plane(plane_index=1)
+
+"""We can also plot a `FitImaging` which uses an `Inversion`."""
+
+source_galaxy = al.Galaxy(
+    redshift=1.0,
+    pixelization=al.pix.VoronoiMagnification(shape=(25, 25)),
+    regularization=al.reg.Constant(coefficient=1.0),
+)
+
+tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
+
+fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
+
+"""
+The `plane_image_from_plane` method now plots the the reconstructed source on the Voronoi pixel-grid. It can use the
+`Include2D` object to plot the `Mapper`'s specific structures like the image and source plane pixelization grids.
+"""
+include_2d = aplt.Include2D(
+    mapper_data_pixelization_grid=True, mapper_source_full_grid=True
+)
+
+fit_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_plotter.figure_plane_image_of_plane(plane_index=1)
+
+"""
+In fact, via the `FitImagingPlotter` we can plot the `reconstruction` with casutics and a border, which are extracted 
+from the `Tracer` of the `FitImaging`. 
+
+To do this with an `InversionPlotter` we would have had to manually pass these attributes via the `Visuals2D` object.
+"""
+include_2d = aplt.Include2D(
+    border=True,
+    caustics=True,
+    mapper_data_pixelization_grid=True,
+    mapper_source_full_grid=True,
+)
+
+fit_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_plotter.figure_plane_image_of_plane(plane_index=1)
+
+"""
+We can even extract an `InversionPlotter` from the `FitImagingPlotter` and use it to plot all of its usual methods, 
+which will now include the caustic and border.
+"""
+inversion_plotter = fit_plotter.inversion_plotter
+inversion_plotter.subplot_inversion()

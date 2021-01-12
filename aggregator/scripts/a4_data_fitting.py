@@ -53,7 +53,8 @@ print(list(dataset_gen)[0].figure_image)
 
 for dataset in agg_filter.values("dataset"):
 
-    aplt.Imaging.subplot_imaging(imaging=dataset)
+    imaging_plotter = aplt.ImagingPlotter(imaging=dataset)
+    imaging_plotter.subplot_imaging()
 
 # %%
 """
@@ -124,7 +125,8 @@ fit_gen = agg_filter.map(func=make_fit_generator)
 
 for fit in fit_gen:
 
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -165,7 +167,8 @@ def make_fit_generator(agg_obj):
 fit_gen = agg_filter.map(func=make_fit_generator)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -190,7 +193,8 @@ def plot_fit(agg_obj):
 fit_gen = agg_filter.map(func=make_fit_generator)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -206,7 +210,8 @@ for masked_imaging in masked_imaging_gen:
 fit_gen = al.agg.FitImaging(aggregator=agg_filter)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -235,7 +240,8 @@ fit_gen = al.agg.FitImaging(
 )
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """
@@ -253,14 +259,16 @@ for fit in fit_gen:
 
     mat_plot_2d = aplt.MatPlot2D(
         figure=aplt.Figure(figsize=(12, 12)),
-        labels=aplt.Labels(title="Custom Image", titlesize=24, labelsize=24, labelsize=24),
-        ticks=aplt.Ticks(labelsize=24, labelsize=24),
+        title=aplt.Title(label="Custom Image", titlesize=24, labelsize=24),
+        yticks=aplt.YTicks(fontsize=24),
+        xticks=aplt.XTicks(fontsize=24),
         cmap=aplt.Cmap(norm="log", vmax=1.0, vmin=1.0),
         colorbar=aplt.Colorbar(ticksize=20),
         units=aplt.Units(in_kpc=True),
     )
 
-    aplt.Fitimaging.normalized_residual_map(fit=fit, mat_plot_2d=mat_plot_2d)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, mat_plot_2d=mat_plot_2d)
+    fit_imaging_plotter.figure_normalized_residual_map()
 
 # %%
 """
@@ -273,10 +281,11 @@ fit_gen = al.agg.FitImaging(aggregator=agg_filter)
 for fit in fit_gen:
 
     mat_plot_2d = aplt.MatPlot2D(
-        labels=aplt.Labels(title="Hey"),
+        title=aplt.Title(label="Hey"),
         output=aplt.Output(
             path=f"output/path/of/file/", filename="publication", format="png"
         ),
     )
 
-    aplt.Fitimaging.normalized_residual_map(fit=fit, mat_plot_2d=mat_plot_2d)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, mat_plot_2d=mat_plot_2d)
+    fit_imaging_plotter.figure_normalized_residual_map()

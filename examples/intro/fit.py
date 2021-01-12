@@ -105,7 +105,9 @@ image with the `Imaging` PSF. We can see this by comparing the tracer`s image (w
 fit`s model image (which is).
 """
 
-aplt.Tracer.figure_image(tracer=tracer, grid=masked_imaging.grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=masked_imaging.grid)
+tracer_plotter.figure_image()
+
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 aplt.Fitimaging.model_image(fit=fit)
@@ -126,7 +128,8 @@ residuals, normalized residuals and chi-squareds are minimized:
 aplt.Fitimaging.residual_map(fit=fit)
 aplt.Fitimaging.normalized_residual_map(fit=fit)
 aplt.Fitimaging.chi_squared_map(fit=fit)
-aplt.FitImaging.subplot_fit_imaging(fit=fit)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 """
 In contrast, a bad lens model will show features in the residual-map and chi-squareds.
@@ -165,4 +168,5 @@ fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 aplt.Fitimaging.residual_map(fit=fit)
 aplt.Fitimaging.normalized_residual_map(fit=fit)
 aplt.Fitimaging.chi_squared_map(fit=fit)
-aplt.FitImaging.subplot_fit_imaging(fit=fit)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()

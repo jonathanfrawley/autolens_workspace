@@ -45,7 +45,7 @@ To plot the critical_curves this object wraps the following matplotlib method:
  https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.pyplot.plot.html
 """
 
-critical_curves_plot = aplt.CriticalCurvesPlot(linestyle="--", linewidth=10, colors="r")
+critical_curves_plot = aplt.CriticalCurvesPlot(linestyle="--", linewidth=10, c="r")
 
 mat_plot_2d = aplt.MatPlot2D(critical_curves_plot=critical_curves_plot)
 
@@ -62,7 +62,7 @@ By default, PyAutoLens uses the same alternating colors for the critical_curves 
 appear the same color on image-plane and source-plane figures.
 """
 
-critical_curves_plot = aplt.CriticalCurvesPlot(colors=["r", "w"])
+critical_curves_plot = aplt.CriticalCurvesPlot(c=["r", "w"])
 
 mat_plot_2d = aplt.MatPlot2D(critical_curves_plot=critical_curves_plot)
 

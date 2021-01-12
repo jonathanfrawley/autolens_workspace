@@ -27,7 +27,7 @@ We customize the grid's appearance using the `GridScatter` `matplotlib wrapper o
  https://matplotlib.org/3.3.2/api/_as_gen/matplotlib.pyplot.scatter.html
 """
 
-grid_scatter = aplt.GridScatter(colors="r", marker=".", s=1)
+grid_scatter = aplt.GridScatter(c="r", marker=".", s=1)
 
 mat_plot_2d = aplt.MatPlot2D(grid_scatter=grid_scatter)
 

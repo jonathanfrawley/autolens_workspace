@@ -118,7 +118,7 @@ search = af.DynestyStatic(
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings and search to create and run a phase, fitting our data with
 the lens model.
 
 The `name` and `path_prefix` below specify the path where results are stored in the output folder:  
@@ -177,7 +177,7 @@ search = af.DynestyStatic(
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings and search to create and run a phase, fitting our data with
 the lens model.
 
 The `name` and `path_prefix` below specify the path where results are stored in the output folder:  

@@ -33,33 +33,16 @@ array_plotter = aplt.ArrayPlotter(array=image, mat_plot_2d=mat_plot_2d)
 array_plotter.figure_array()
 
 """
-The labels and ticks of the `Colorbar` can also be customized. 
+The labels of the `Colorbar` can also be customized. 
 
 This uses the `cb.ax.set_yticklabels` to manually override the tick locations and labels:
  
  https://matplotlib.org/3.3.3/api/_as_gen/matplotlib.axes.Axes.set_yticklabels.html
  
-If also uses `cb.ax.tick_params` to customize the axes of the color bar:
-
- https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.tick_params.html
- 
 The input parameters of both the above methods can be passed into the `Colorbar` object.
 """
 
-cb = aplt.Colorbar(
-    manual_tick_labels=[1.0, 2.0],
-    manual_tick_values=[0.0, 0.25],
-    axis="both",
-    reset=False,
-    which="major",
-    direction="in",
-    length=2,
-    width=2,
-    color="r",
-    pad=0.1,
-    labelsize=10,
-    labelcolor="r",
-)
+cb = aplt.Colorbar(manual_tick_labels=[1.0, 2.0], manual_tick_values=[0.0, 0.25])
 
 
 mat_plot_2d = aplt.MatPlot2D(colorbar=cb)

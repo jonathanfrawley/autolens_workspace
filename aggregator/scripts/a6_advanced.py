@@ -92,7 +92,8 @@ This aggregator can now be used, as usual, to make plots of quantities like the 
 fit_gen = al.agg.FitImaging(aggregator=agg_power_law_hyper_shear)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 
 # %%
@@ -126,22 +127,26 @@ agg_power_law_hyper_shear = agg_tmp.filter(
 fit_gen = al.agg.FitImaging(aggregator=agg_tmp)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 fit_gen = al.agg.FitImaging(aggregator=agg_power_law_shear)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 fit_gen = al.agg.FitImaging(aggregator=agg_power_law_hyper_with_shear)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 fit_gen = al.agg.FitImaging(agg_power_law_hyper_shear)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 # %%
 """          
@@ -158,4 +163,5 @@ agg_dataset_0 = agg_power_law.filter(
 fit_gen = al.agg.FitImaging(aggregator=agg_dataset_0)
 
 for fit in fit_gen:
-    aplt.FitImaging.subplot_fit_imaging(fit=fit)
+    fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()

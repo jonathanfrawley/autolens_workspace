@@ -110,7 +110,8 @@ By inspecting the residual-map, normalized residual-map and chi-squared-map of t
 the source reconstruction accurately fits the image of the strong lens:
 """
 
-aplt.FitImaging.subplot_fit_imaging(fit=fit)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit)
+fit_imaging_plotter.subplot_fit_imaging()
 
 """
 This script has given a brief overview of *Inversions* with **PyAutoLens**. However, there is a lot more to using

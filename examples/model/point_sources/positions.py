@@ -1,12 +1,8 @@
 """
-__Example: Modeling__
+__Example: Point-Source Positions__
 
 To fit a lens model to positional constraints of a strong lens, we must perform lens modeling, which uses
 a `NonLinearSearch` to fit many different sets of multiple images to the dataset.
-
-Model-fitting is handled by our project **PyAutoFit**, a probabilistic programming language for non-linear model
-fitting. The setting up of configuration files is performed by our project **PyAutoConf**. we'll need to import
-both to perform the model-fit.
 """
 
 """
@@ -34,7 +30,9 @@ import autolens.plot as aplt
 dataset_name = "mass_sie__source_point"
 dataset_path = path.join("dataset", "point_source", dataset_name)
 
-image = al.Array.from_fits(file_path=path.join(dataset_path, "image.fits"), pixel_scales=0.05)
+image = al.Array.from_fits(
+    file_path=path.join(dataset_path, "image.fits"), pixel_scales=0.05
+)
 
 """
 We now load these positions we will fit using point source modeling. We load them as a `GridIrregularGrouped` data 
@@ -44,7 +42,7 @@ group.
 """
 
 positions = al.GridIrregularGrouped.from_file(
-    file_path=path.join(dataset_path, "positions.dat"),
+    file_path=path.join(dataset_path, "positions.dat")
 )
 
 print(positions.in_grouped_list)
@@ -72,23 +70,11 @@ make this noise-map by creating a `ValuesIrregularGrouped` structure from the `G
 positions_noise_map = positions.values_from_value(value=image.pixel_scale)
 
 print(positions_noise_map)
-stop
-
-"""The model-fit also requires a mask defining the regions of the image we fit the lens model to the data."""
-
-mask = al.Mask2D.circular(
-    shape_2d=imaging.shape_2d, pixel_scales=imaging.pixel_scales, radius=3.0
-)
-
-imaging_plotter = aplt.ImagingPlotter(
-    imaging=imaging, visuals_2d=aplt.Visuals2D(mask=mask)
-)
-imaging_plotter.subplot_imaging()
 
 """
 __Phase__
 
-To perform lens modeling, we create a `PhaseImaging` object, which comprises:
+To perform lens modeling, we create a `PhasePointSource` object, which comprises:
 
    - The `GalaxyModel`'s used to fit the data.
    - The `SettingsPhase` which customize how the model is fitted to the data.
@@ -104,9 +90,9 @@ We compose our lens model using `GalaxyModel` objects, which represent the galax
 example our lens mooel is:
 
  - An `EllipticalIsothermal` `MassProfile`.for the lens `Galaxy`'s mass (5 parameters).
- - An `EllipticalSersic` `LightProfile`.for the source `Galaxy`'s light (7 parameters).
+ - A `PointSource` for the source `Galaxy`'s emission (2 parameters).
 
-The number of free parameters and therefore the dimensionality of non-linear parameter space is N=12.
+The number of free parameters and therefore the dimensionality of non-linear parameter space is N=7.
 
 NOTE: By default, **PyAutoLens** assumes the image has been reduced such that the lens galaxy centre is at (0.0", 0.0"),
 with the priors on the lens `MassProfile` coordinates set accordingly. if for your dataset the lens is not centred at 
@@ -115,7 +101,7 @@ can manually override the priors (see `autolens_workspace/examples/customize/pri
 """
 
 lens = al.GalaxyModel(redshift=0.5, mass=al.mp.EllipticalIsothermal)
-source = al.GalaxyModel(redshift=1.0, bulge=al.lp.EllipticalSersic)
+source = al.GalaxyModel(redshift=1.0, point=al.lp.PointSource)
 
 """
 __Settings__
@@ -123,18 +109,25 @@ __Settings__
 Next, we specify the `SettingsPhaseImaging`, which describe how the model is fitted to the data in the log likelihood
 function. Below, we specify:
 
- - That a regular `Grid` is used to fit create the model-image when fitting the data 
-      (see `autolens_workspace/examples/grids.py` for a description of grids).
- - The sub-grid size of this grid.
-
-Different `SettingsPhase` are used in different example model scripts and a full description of all `SettingsPhase` 
-can be found in the example script `autolens/workspace/examples/model/customize/settings.py` and the following 
-link -> <link>
+ N/A
 """
 
-settings_masked_imaging = al.SettingsMaskedImaging(grid_class=al.Grid, sub_size=2)
+settings = al.SettingsPhaseImaging()
 
-settings = al.SettingsPhaseImaging(settings_masked_imaging=settings_masked_imaging)
+
+"""
+__PositionsSolver__
+
+For point-source modeling we also need to define our `PositionsSolver`. This object determines the multiple-images of 
+a mass model for a point source at location (y,x) in the source plane, by iteratively ray-tracing light rays to the 
+source-plane. 
+
+Checkout the script ? for a complete description of this object, we will use the default `PositionSolver` in this 
+exampl
+"""
+grid = al.Grid.uniform(shape_2d=image.shape_2d, pixel_scales=image.pixel_scales)
+ 
+positions_solver = al.PositionsSolver(grid=grid, pixel_scale_precision=0.02)
 
 """
 __Search__
@@ -154,33 +147,34 @@ The `name` and `path_prefix` below specify the path where results ae stored in t
 """
 
 search = af.DynestyStatic(
-    path_prefix=path.join("examples", "beginner", dataset_name),
-    name="phase_mass[sie]_source[bulge]",
+    path_prefix=path.join("examples", "point_source", dataset_name),
+    name="phase_mass[sie]_source[point]",
     n_live_points=50,
 )
 
 """
 __Phase__
 
-We can now combine the model, settings and `NonLinearSearch` above to create and run a phase, fitting our data with
+We can now combine the model, settings, search and positions_solver to create and run a phase, which fits the data with 
 the lens model.
 """
 
-phase = al.PhaseImaging(
+phase = al.PhasePointSource(
     search=search,
     galaxies=af.CollectionPriorModel(lens=lens, source=source),
     settings=settings,
+    positions_solver=positions_solver,
 )
 
 """
-We can now begin the fit by passing the dataset and mask to the phase, which will use the `NonLinearSearch` to fit
-the model to the data. 
+We can now begin the fit by passing the positions data and noise_map to the phase, which will use 
+the search to fit the model to the data. 
 
 The fit outputs visualization on-the-fly, so checkout the path 
 `/path/to/autolens_workspace/output/examples/phase_mass[sie]_source[bulge]` to see how your fit is doing!
 """
 
-result = phase.run(dataset=imaging, mask=mask)
+result = phase.run(positions=positions, positions_noise_map=positions_noise_map)
 
 """
 The phase above returned a result, which, for example, includes the lens model corresponding to the maximum
@@ -188,18 +182,6 @@ log likelihood solution in parameter space.
 """
 
 print(result.max_log_likelihood_instance)
-
-"""
-It also contains instances of the maximum log likelihood Tracer and FitImaging, which can be used to visualize
-the fit.
-"""
-
-tracer_plotter = aplt.TracerPlotter(
-    tracer=result.max_log_likelihood_tracer, grid=mask.geometry.masked_grid_sub_1
-)
-tracer_plotter.subplot_tracer()
-fit_imaging_plotter = aplt.FitImagingPlotter(fit=result.max_log_likelihood_fit)
-fit_imaging_plotter.subplot_fit_imaging()
 
 """
 Checkout `/path/to/autolens_workspace/examples/model/results.py` for a full description of the result object.

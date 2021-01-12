@@ -17,7 +17,7 @@ gives it a descriptive name. They define the folder the dataset is output to on 
  - The noise-map will be output to `/autolens_workspace/dataset/dataset_type/dataset_name/lens_name/noise_map.json`.
 """
 
-dataset_type = "positions"
+dataset_type = "point_source"
 dataset_name = "mass_sie__source_point"
 
 """
@@ -52,9 +52,9 @@ lens_galaxy = al.Galaxy(
 source_galaxy = al.Galaxy(
     redshift=1.0,
     light=al.lp.EllipticalExponential(
-        centre=(0.1, 0.1), intensity=0.1, effective_radius=0.05
+        centre=(0.1, 0.1), intensity=0.1, effective_radius=0.02
     ),
-    point=al.lp.PointSource(centre=(0.1, 0.1))
+    point=al.lp.PointSource(centre=(0.1, 0.1)),
 )
 
 """Use these galaxies to setup a tracer, which will compute the multiple image positions of the simulated dataset."""
@@ -68,40 +68,52 @@ We will use computationally slow but robust settings to ensure we accurately loc
 """
 
 grid = al.Grid.uniform(
-    shape_2d=(600, 600),
-    pixel_scales=0.01,  # <- The pixel-scale describes the conversion from pixel units to arc-seconds.
+    shape_2d=(100, 100),
+    pixel_scales=0.05,  # <- The pixel-scale describes the conversion from pixel units to arc-seconds.
 )
 
 solver = al.PositionsSolver(
-    grid=grid,
-    use_upscaling=True,
-    pixel_scale_precision=0.0001,
-    upscale_factor=3
+    grid=grid, use_upscaling=True, pixel_scale_precision=0.001, upscale_factor=2
 )
 
 """
 We now pass the `Tracer` to the solver. This will then find the image-plane coordinates that map directly to the
 source-plane coordinate (0.1", 0.1").
 """
-positions = solver.solve_from_tracer(
-    tracer=tracer,
-)
+positions = solver.solve_from_tracer(tracer=tracer)
 
 """
 We now plot the image of the `Tracer`'s faint disk, with the positions overlaid, to illustrate this strong lens.
 """
+
+# Hack to turn the 8 located coordinates to 4, will fix in future.
+
+print(positions)
+
+positions_new = []
+positions_new.append(positions[0])
+positions_new.append(positions[2])
+positions_new.append(positions[3])
+positions_new.append(positions[5])
+
+positions = al.GridIrregularGrouped(grid=[positions_new])
+
 visuals_2d = aplt.Visuals2D(multiple_images=positions)
 
 tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid, visuals_2d=visuals_2d)
 tracer_plotter.figure_image()
 
-print(positions)
+mat_plot_2d = aplt.MatPlot2D(
+    output=aplt.Output(path=dataset_path, filename="image", format="fits")
+)
+
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid, mat_plot_2d=mat_plot_2d)
+tracer_plotter.figure_image()
 
 """Output our simulated dataset to the dataset path as .fits files"""
 
 positions.output_to_file(
-    file_path=path.join(dataset_path, "positions.dat"),
-    overwrite=True,
+    file_path=path.join(dataset_path, "positions.dat"), overwrite=True
 )
 
 """

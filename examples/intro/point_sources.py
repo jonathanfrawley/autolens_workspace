@@ -1,17 +1,18 @@
 """
 __Example: Point Sources__
 
-PyAutoLens is primarily designed for strongly lensed galaxies, whose extended surface brightness is lensed into the
-aweinspiring giant arcs and Einstein rings we see in high quality lens imaging. However, there are a lot of science
-cases where the backgound source is not extended but a point-source, for example strongly lensed quasars and supernovae.
+So far, the PyAutoLens tutorials have shown strongly lensed galaxies, whose extended surface brightness is lensed into
+the awe-inspiring giant arcs and Einstein rings we see in high quality telescope imaging. However, there are many
+lenses where the backgound source is not extended but is instead a point-source, for example strongly lensed quasars
+and supernovae.
 
 For these objects, we do not want to model the source using a `LightProfile` which implicitly assumes an extended
-surface brightness distribution. Instead, we assume that our source is a point with centre (y,x). Our ray-tracing
-calculations no longer trace light from the source plane to the image-plane, but instead want to find the locations
-the point-source multiple image appear in the image-plane.
+surface brightness distribution. Instead, we assume that our source is a point source with a centre (y,x). Our
+ray-tracing calculations no longer trace extended light rays from the source plane to the image-plane, but instead
+now find the locations the point-source's multiple images appear in the image-plane.
 
 Finding the multiple images of a mass model given a (y,x) coordinate in the source plane is an iterative problem
-performed in a very different way to ray-tracing a `LightProile`. In this example, we introduce **PyAutoLens**`s
+performed in a very different way to ray-tracing a `LightProfile`. In this example, we introduce **PyAutoLens**`s
 _PositionSolver_, which does exactly this and thus makes the analysis of strong lensed quasars, supernovae and
 point-like source`s possible in **PyAutoLens**! we'll also show how these tools allow us to compute the flux-ratios
 and time-delays of the point-source.
@@ -22,11 +23,11 @@ import autolens.plot as aplt
 
 """
 To begin, we will create an image of strong lens using a simple `EllipticalIsothermal` mass model and source with an
-`EllipticalExponential` light profile. Although we are going to show how **PyAutoLens**`s positional analysis tools model
-point-sources, showing the tools using an extended source will make it visibly clearer where the multiple images of
-the point source are!
+`EllipticalExponential` light profile. Although we are going to show how **PyAutoLens**`s positional analysis tools 
+model point-sources, showing the tools using an extended source will make it visibly clearer where the multiple 
+images of the point source are!
 
-Below, we set up a `Tracer` using a `Grid`, `LightProfile`, `MassProfile` and two `Galaxy``.. These objects are 
+Below, we set up a `Tracer` using a `Grid`, `LightProfile`, `MassProfile` and two `Galaxy`'s. These objects are 
 introduced in the `lensing.py` example script, so if it is unclear what they are doing you should read through that
 example first before continuing!
 """
@@ -59,14 +60,43 @@ located in a cross configuration, which are the four (y,x) multiple image coordi
 to find! 
 """
 
-# aplt.Tracer.image(tracer=tracer, grid=grid)
+tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid)
+tracer_plotter.figure_image()
 
 """
-Infact, the `Tracer` has the `PositionSolver` we introduce next built into it, and we can use this to plot the
-_Tracer_`s multiple images on the figure (they should appear as black dots on the image)!
+The image above visually illustrates where the source's light traces too in the image-plane. Lets now treat this source
+as a point source, by setting up a source galaxy and `Tracer` using the `PointSource` class. 
 """
 
-# aplt.Tracer.image(tracer=tracer, grid=grid, include_2d=aplt.Include2D(multiple_images=True))
+point_source = al.lp.PointSource(centre=(0.07, 0.07))
+
+source_galaxy = al.Galaxy(redshift=1.0, point=point_source)
+
+tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy])
+
+"""
+For a `PointSource`, our goal is to find the (y,x) coordinates in the image-plane that directly map to the centre
+of the `PointSource` in the source plane. In this example, we therefore need to compute the 4 image-plane that map
+directly to the location (0.07", 0.07") in the source plane.
+
+This is an iterative problem that requires us to use the `PositionsFinder`. 
+"""
+
+solver = al.PositionsSolver(
+    grid=grid,
+    pixel_scale_precision=0.001,
+    upscale_factor=2,
+    distance_from_source_centre=0.01,
+)
+
+"""
+We now pass the `Tracer` to the solver. This will then find the image-plane coordinates that map directly to the
+source-plane coordinate (0.07", 0.07").
+"""
+positions = solver.solve_from_tracer(tracer=tracer)
+
+grid_plotter = aplt.GridPlotter(grid=positions)
+grid_plotter.figure_grid()
 
 """
 At this point, you might be wondering why don't we use the image of the lensed source to compute our multiple images?
@@ -78,16 +108,3 @@ the `Grid` has a pixel scale of 0.05", however we want to determine our multiple
 or less. We could increase our grid resolutin to 0.01" or below, but this will quickly become very computationally
 expensive, thus a bespoke `PositionSolver` is required!
 """
-
-solver = al.PositionsFinder(
-    grid=grid,
-    pixel_scale_precision=0.001,
-    upscale_factor=2,
-    distance_from_source_centre=0.01,
-)
-
-positions = solver.solve(
-    lensing_obj=lens_galaxy, source_plane_coordinate=source_galaxy.light.centre
-)
-
-aplt.Tracer.figure_image(tracer=tracer, grid=grid, positions=positions)

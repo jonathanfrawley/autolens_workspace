@@ -34,8 +34,8 @@ tickparams = aplt.TickParams(
     grid_alpha=0.8,
 )
 
-yticks = aplt.YTicks(alpha=0.8, fontsize=10, length=0.1, rotation="vertical")
-xticks = aplt.XTicks(alpha=0.5, fontsize=5, length=0.2, rotation="horizontal")
+yticks = aplt.YTicks(alpha=0.8, fontsize=10, rotation="vertical")
+xticks = aplt.XTicks(alpha=0.5, fontsize=5, rotation="horizontal")
 
 mat_plot_2d = aplt.MatPlot2D(tickparams=tickparams, yticks=yticks, xticks=xticks)
 

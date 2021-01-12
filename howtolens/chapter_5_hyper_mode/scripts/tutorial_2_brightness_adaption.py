@@ -91,14 +91,14 @@ Lets have a quick look to make sure it has the same residuals we saw in tutorial
 """
 
 # %%
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
+include_2d = aplt.Include2D(
+    mask=True, mapper_data_pixelization_grid=True, mapper_source_pixelization_grid=True
 )
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
+fit_imaging_plotter.subplot_of_plane(plane_index=1)
+
 
 # %%
 """
@@ -137,14 +137,9 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_galaxy_brightness
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.FitImaging.subplot_fit_imaging(
-    fit=fit, include_2d=aplt.Include2D(mapper_data_pixelization_grid=True, mask=True)
-)
-
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.subplot_fit_imaging()
+fit_imaging_plotter.subplot_of_plane(plane_index=1)
 
 # %%
 """
@@ -231,7 +226,10 @@ cluster_weight_power_0 = source_weight_power_0.pixelization.weight_map_from_hype
     hyper_image=source_weight_power_0.hyper_galaxy_image
 )
 
-aplt.ArrayPlotter(array=cluster_weight_power_0, mask=mask)
+array_plotter = aplt.ArrayPlotter(
+    array=cluster_weight_power_0, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+array_plotter.figure_array()
 
 source_weight_power_5 = al.Galaxy(
     redshift=1.0,
@@ -247,7 +245,10 @@ cluster_weight_power_5 = source_weight_power_5.pixelization.weight_map_from_hype
     hyper_image=source_weight_power_5.hyper_galaxy_image
 )
 
-aplt.ArrayPlotter(array=cluster_weight_power_5, mask=mask)
+array_plotter = aplt.ArrayPlotter(
+    array=cluster_weight_power_0, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+array_plotter.figure_array()
 
 source_weight_power_10 = al.Galaxy(
     redshift=1.0,
@@ -263,7 +264,10 @@ cluster_weight_power_10 = source_weight_power_10.pixelization.weight_map_from_hy
     hyper_image=source_weight_power_10.hyper_galaxy_image
 )
 
-aplt.ArrayPlotter(array=cluster_weight_power_10, mask=mask)
+array_plotter = aplt.ArrayPlotter(
+    array=cluster_weight_power_0, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+array_plotter.figure_array()
 
 # %%
 """
@@ -277,28 +281,22 @@ tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_0])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.figure_plane_image_of_plane(plane_index=1)
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_5])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.figure_plane_image_of_plane(plane_index=1)
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_power_10])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.figure_plane_image_of_plane(plane_index=1)
 
 # %%
 """
@@ -326,16 +324,17 @@ cluster_weight_floor = source_weight_floor.pixelization.weight_map_from_hyper_im
     hyper_image=source_weight_floor.hyper_galaxy_image
 )
 
-aplt.ArrayPlotter(array=cluster_weight_floor, mask=mask)
+array_plotter = aplt.ArrayPlotter(
+    array=cluster_weight_power_0, visuals_2d=aplt.Visuals2D(mask=mask)
+)
+array_plotter.figure_array()
 
 tracer = al.Tracer.from_galaxies(galaxies=[lens_galaxy, source_weight_floor])
 
 fit = al.FitImaging(masked_imaging=masked_imaging, tracer=tracer)
 
-aplt.Inversion.figure_reconstruction(
-    inversion=fit.inversion,
-    include_2d=aplt.Include2D(mapper_source_pixelization_grid=True),
-)
+fit_imaging_plotter = aplt.FitImagingPlotter(fit=fit, include_2d=include_2d)
+fit_imaging_plotter.figure_plane_image_of_plane(plane_index=1)
 
 # %%
 """
