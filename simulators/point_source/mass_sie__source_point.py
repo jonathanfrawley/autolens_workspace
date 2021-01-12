@@ -1,4 +1,5 @@
 from os import path
+import numpy as np
 import autolens as al
 import autolens.plot as aplt
 
@@ -98,6 +99,15 @@ positions_new.append(positions[5])
 
 positions = al.GridIrregularGrouped(grid=[positions_new])
 
+"""Use the positions to compute the magnification of the `Tracer` at every position."""
+
+magnifications = tracer.magnification_irregular_from_grid(grid=positions)
+
+"""We can now compute the observed fluxes of the `PointSource`, give we know how much each is magnified."""
+flux = 1.0
+fluxes = [flux * np.abs(magnification) for magnification in magnifications]
+fluxes = al.ValuesIrregularGrouped(values=fluxes)
+
 visuals_2d = aplt.Visuals2D(multiple_images=positions)
 
 tracer_plotter = aplt.TracerPlotter(tracer=tracer, grid=grid, visuals_2d=visuals_2d)
@@ -115,6 +125,7 @@ tracer_plotter.figure_image()
 positions.output_to_file(
     file_path=path.join(dataset_path, "positions.dat"), overwrite=True
 )
+fluxes.output_to_file(file_path=path.join(dataset_path, "fluxes.dat"), overwrite=True)
 
 """
 Pickle the `Tracer` in the dataset folder, ensuring the true `Tracer` is safely stored and available if we need to 

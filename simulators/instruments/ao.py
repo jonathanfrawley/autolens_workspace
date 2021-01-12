@@ -44,7 +44,7 @@ grid = al.GridIterate.uniform(
 """Simulate a simple Gaussian PSF for the image."""
 
 psf = al.Kernel.from_gaussian(
-    shape_2d=(31, 31), sigma=0.025, pixel_scales=grid.pixel_scales, renormalize=True
+    shape_2d=(21, 21), sigma=0.025, pixel_scales=grid.pixel_scales, renormalize=True
 )
 
 """
@@ -53,10 +53,7 @@ noise levels and psf of the dataset that is simulated.
 """
 
 simulator = al.SimulatorImaging(
-    exposure_time_map=al.Array.full(fill_value=1000.0, shape_2d=grid.shape_2d),
-    psf=psf,
-    background_sky_map=al.Array.full(fill_value=1.0, shape_2d=grid.shape_2d),
-    add_poisson_noise=True,
+    exposure_time=1000.0, psf=psf, background_sky_level=1.0, add_poisson_noise=True
 )
 
 """Setup the lens `Galaxy`'s mass (SIE+Shear) and source galaxy light (elliptical Sersic) for this simulated lens."""
@@ -68,7 +65,6 @@ lens_galaxy = al.Galaxy(
         einstein_radius=1.6,
         elliptical_comps=al.convert.elliptical_comps_from(axis_ratio=0.8, phi=45.0),
     ),
-    shear=al.mp.ExternalShear(elliptical_comps=(0.0, 0.05)),
 )
 
 source_galaxy = al.Galaxy(

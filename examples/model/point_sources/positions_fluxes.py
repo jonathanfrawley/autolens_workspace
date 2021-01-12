@@ -47,6 +47,19 @@ positions = al.GridIrregularGrouped.from_file(
 
 print(positions.in_grouped_list)
 
+"""
+We also load the observed fluxes of the point source at every one of these position. We load them as 
+a `ValuesIrregularGrouped` data  structure, which groups different sets of positions to a common source. This is used, 
+for example, when there are  multiple source galaxy's in the source plane. For this simple example, we assume there 
+is just one source and just one group.
+"""
+
+fluxes = al.ValuesIrregularGrouped.from_file(
+    file_path=path.join(dataset_path, "fluxes.dat")
+)
+
+print(fluxes.in_grouped_list)
+
 """We can now plot our positions dataset over the observed image."""
 
 visuals_2d = aplt.Visuals2D(positions=positions)
@@ -66,10 +79,14 @@ observed dataset, which in this case is 0.05".
 The `position_noise_map` should have the same structure as the `GridIrregularGrouped`. In this example, the positions
 are a single group of 4 (y,x) coordinates, therefore their noise map should be a single group of 4 floats. We can
 make this noise-map by creating a `ValuesIrregularGrouped` structure from the `GridIrregularGrouped`.
+
+We also create the noise map of fluxes, which for simplicity here I have entered manually.
 """
 positions_noise_map = positions.values_from_value(value=image.pixel_scale)
 
 print(positions_noise_map)
+
+fluxes_noise_map = al.ValuesIrregularGrouped(values=[[1.0, 2.0, 3.0, 4.0]])
 
 """
 __Phase__
@@ -101,7 +118,7 @@ can manually override the priors (see `autolens_workspace/examples/customize/pri
 """
 
 lens = al.GalaxyModel(redshift=0.5, mass=al.mp.EllipticalIsothermal)
-source = al.GalaxyModel(redshift=1.0, point=al.lp.PointSource)
+source = al.GalaxyModel(redshift=1.0, point=al.lp.PointSourceFlux)
 
 """
 __Settings__
@@ -143,12 +160,12 @@ operates, I recommend you complete chapters 1 and 2 of the HowToLens lecture ser
 
 The `name` and `path_prefix` below specify the path where results ae stored in the output folder:  
 
- `/autolens_workspace/output/examples/beginner/mass_sie__source_sersic/phase_mass[sie]_source[bulge]`.
+ `/autolens_workspace/output/examples/beginner/mass_sie__source_sersic/phase_mass[sie]_source[point_flux]`.
 """
 
 search = af.DynestyStatic(
     path_prefix=path.join("examples", "point_source", dataset_name),
-    name="phase_mass[sie]_source[point]",
+    name="phase_mass[sie]_source[point_flux]",
     n_live_points=50,
 )
 
@@ -171,10 +188,15 @@ We can now begin the fit by passing the positions data and noise_map to the phas
 the search to fit the model to the data. 
 
 The fit outputs visualization on-the-fly, so checkout the path 
-`/path/to/autolens_workspace/output/examples/phase_mass[sie]_source[point]` to see how your fit is doing!
+`/path/to/autolens_workspace/output/examples/phase_mass[sie]_source[bulge]` to see how your fit is doing!
 """
 
-result = phase.run(positions=positions, positions_noise_map=positions_noise_map)
+result = phase.run(
+    positions=positions,
+    positions_noise_map=positions_noise_map,
+    fluxes=fluxes,
+    fluxes_noise_map=fluxes_noise_map,
+)
 
 """
 The phase above returned a result, which, for example, includes the lens model corresponding to the maximum
